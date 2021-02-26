@@ -9,7 +9,7 @@
 ### Request URL：
 	http://localhost:3000/login
 
-### Request URL
+### Request Method
 	POST
 
 ### Parameters
@@ -37,7 +37,7 @@
 ### Request URL：
 	http://localhost:3000/register
 
-### Request URL
+### Request Method
 	POST
 
 ### Parameters
