@@ -4,8 +4,10 @@ This is our SSW-695 project
 + Development plan: https://docs.google.com/document/d/1y3019feMm72ng7-2Fazr346GXc17Uv9rKQ8XBureSiI
 
 To run the app:
-(first time) Download node.js and mongodb. Download the code and then enter to the InterNatter folder by command prompt(windows: cmd).
-             Then input npm i express ejs mongoose nodemon, and press enter to download packages.
-(every time) Start mongod.exe and mongo.exe.
-             Enter to the InterNatter folder by command prompt and then input node app.js (or nodemon app.js) and then press enter.
-             The server will be running at http://localhost:3000/
++ First Time
+  - Download node.js and mongodb. Download the code and then enter to the InterNatter folder by command prompt(windows: cmd).
+  - Then input npm i express ejs mongoose nodemon, and press enter to download packages.
++ Every Time
+  - Start mongod.exe and mongo.exe.
+  - Enter to the InterNatter folder by command prompt and then input node app.js (or nodemon app.js) and then press enter.
+  - The server will be running at http://localhost:3000/
