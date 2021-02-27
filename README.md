@@ -5,7 +5,7 @@ This is our SSW-695 project
 
 To run the app:
 + First Time
-  - Download node.js and mongodb. Download the code and then enter to the InterNatter folder by command prompt(windows: cmd).
+  - Download node.js and mongodb. Clone the code and then enter to the InterNatter folder by command prompt(windows: cmd).
   - Then input npm i express ejs mongoose nodemon, and press enter to download packages.
 + Every Time
   - Start mongod.exe and mongo.exe.
