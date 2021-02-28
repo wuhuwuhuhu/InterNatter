@@ -28,9 +28,14 @@ router.get('/login', (req, res) => {
     res.render('users/login');
 });
 
+// router.get('/profile', (req, res) => {
+//     console.log(req);
+//     res.render('users/profile');
+// });
+
 router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {
     req.flash('success', 'Welcome Back!');
-    const redirectUrl = req.session.returnTo || '/campgrounds'; 
+    const redirectUrl = req.session.returnTo || '/chatrooms'; 
     delete req.session.returnTo;
     res.redirect(redirectUrl);  // redirect to the page before login
 });
