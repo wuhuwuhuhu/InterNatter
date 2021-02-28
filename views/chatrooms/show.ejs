@@ -1,0 +1,12 @@
+<% layout('layouts/boilerplate')%>
+
+<h1> <%= chatroom.title %> </h1>
+<h2> To show: chatbox, memberList </h2>
+<div>
+    <form action="/chatrooms/<%=chatroom._id%>?_method=DELETE" method="POST">
+        <button class="btn btn-danger">Delete</button>
+    </form>
+</div>
+<div>
+    <a href="/chatrooms/<%=chatroom._id%>/edit">Edit</a>
+</div>
