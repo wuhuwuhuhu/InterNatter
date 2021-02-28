@@ -7,7 +7,7 @@ To run the app:
 + First Time
   - Download node.js and mongodb. Clone the code and then enter to the InterNatter folder by command prompt(windows: cmd).
   - Then input:
-  -  npm i express ejs-mate mongoose express-session connect-flash method-override passport passport-local-mongoose
+  -  npm i express ejs-mate mongoose express-session connect-flash method-override passport passport-local-mongoose joi
   -  and press enter to download packages.
 + Every Time
   - Start mongod.exe and mongo.exe.
