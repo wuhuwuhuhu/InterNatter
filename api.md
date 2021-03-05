@@ -12,6 +12,9 @@
 ### Request Method：
 	models/user.checkPassword(username, password)
 
+### description
+  * after login, save username, userId, language in cookie
+
 ### Parameters
 	|Parameter   |Required?  |Type     |Description
 	|username    |Y          |string   |user name
@@ -40,7 +43,8 @@
 
 ### description
   * parameter language will be selected from model/translate/language.js
-
+  * after successfully register and authen, save username, userId, language in cookie
+  
 ### Parameters
 	|Parameter   |Required?  |Type     |Description
 	|username    |Y          |string   |user name
