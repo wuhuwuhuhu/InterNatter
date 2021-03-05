@@ -39,7 +39,43 @@ router.get('/:id', catchAsync(async (req, res) => {
         req.flash('error', 'Cannot find that chatroom');
         return res.redirect('/chatrooms');
     }
-    res.render('chatrooms/show', { chatroom });
+    res.cookie('username','whd', {maxAge: 1000*60*60*24*7})
+    let data = 	  [
+          {
+            "sender": "Jerry",
+            "content": "Hello.",
+            "send_time": 1614907034604
+          },
+          {
+            "sender": "zhao",
+            "content": "Nice to meet you.",
+            "send_time": 1614907035620
+          },
+          {
+            "sender": "John",
+            "content": "Hello.",
+            "send_time": 1614907044604
+          },
+          {
+            "sender": "Mike",
+            "content": "Nice to meet you.",
+            "send_time": 1614907134620
+          },
+          {
+            "sender": "Nicole",
+            "content": "Hello.",
+            "send_time": 1614907234604
+          },
+          {
+            "sender": "whd",
+            "content": "Nice to meet you.",
+            "send_time": 1614905034620
+          }
+        ]
+      
+    // let username = req.cookie.username
+    let username = 'whd'
+    res.render('chatrooms/show', { chatroom, data, username });
 }));
 
 router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res) => {
