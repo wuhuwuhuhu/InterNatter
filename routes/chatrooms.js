@@ -39,7 +39,7 @@ router.get('/:id', catchAsync(async (req, res) => {
         req.flash('error', 'Cannot find that chatroom');
         return res.redirect('/chatrooms');
     }
-    res.cookie('username','whd', {maxAge: 1000*60*60*24*7})
+    // res.cookie('username','whd', {maxAge: 1000*60*60*24*7})
     let data = 	  [
           {
             "sender": "Jerry",
@@ -72,9 +72,9 @@ router.get('/:id', catchAsync(async (req, res) => {
             "send_time": 1614905034620
           }
         ]
-      
     // let username = req.cookie.username
-    let username = 'whd'
+    let username = req.user===undefined? "":req.user.username;
+    res.cookie('username',username, {maxAge: 1000*60*60*24*7})
     res.render('chatrooms/show', { chatroom, data, username });
 }));
 

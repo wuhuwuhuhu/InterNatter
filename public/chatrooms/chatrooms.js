@@ -20,6 +20,7 @@ $(function () {
             break
         }
     }
+    username = username === ""?"Anonymous User": username
     $sendMsgError.hide()
     $sendMsgText.focus(function(){
         $sendMsgError.html("")
