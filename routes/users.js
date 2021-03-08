@@ -28,22 +28,9 @@ router.get('/login', (req, res) => {
     res.render('users/login');
 });
 
-router.get('/profile', catchAsync(async (req, res) => {
-    console.log(req.user);
-    const user = await User.findById(req.user._id);
-    // const {user} = req.session.passport;
-    // console.log()；
-    // if (!user) {
-    //     req.flash('error', 'Please log in');
-    //     return res.redirect('/chatrooms');
-    // }
-    res.render('users/profile', {user});
-}));
-
-// router.get('/profile', (req, res) => {
-//     console.log(req);
-//     res.render('users/profile');
-// });
+router.get('/profile', (req, res) => {
+    res.render('users/profile', {user: req.user});
+});
 
 router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {
     req.flash('success', 'Welcome Back!');

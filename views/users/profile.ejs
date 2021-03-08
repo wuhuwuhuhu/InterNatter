@@ -1,5 +1,12 @@
 <% layout('layouts/boilerplate')%>
+<h1>Profile</h1>
+
+<br>
 
 
-
-<h1><%=user%></h1>
+<div class="mb-3">
+    <label class="form-label" for="username">Username: <%=user.username%></label>
+</div>
+<div class="mb-3">
+    <label class="form-label" for="email">Email: <%=user.email%></label>
+</div>

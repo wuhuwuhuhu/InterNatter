@@ -10,6 +10,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 const { resolveSoa } = require('dns');
+const http = require('http');
 
 // routes
 const userRoutes = require('./routes/users');
@@ -30,6 +31,13 @@ db.once("open", () => {
 });
 
 const app = express();
+
+//
+var port = '4000'
+app.set('port', port);
+var server = http.createServer(app);
+require('./models/socketIO_server')(server)
+server.listen(port);
 
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
@@ -63,7 +71,7 @@ passport.deserializeUser(User.deserializeUser());
 
 // flash middleware
 app.use((req, res, next) => {
-    console.log(req.session);
+    // console.log(req.session);
     res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
