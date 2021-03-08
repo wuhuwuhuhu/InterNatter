@@ -28,10 +28,10 @@ router.get('/login', (req, res) => {
     res.render('users/login');
 });
 
-// router.get('/profile', (req, res) => {
-//     console.log(req);
-//     res.render('users/profile');
-// });
+router.get('/profile', (req, res) => {
+    console.log(req);
+    res.render('users/profile');
+});
 
 router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {
     req.flash('success', 'Welcome Back!');
