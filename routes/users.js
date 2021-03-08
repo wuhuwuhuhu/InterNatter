@@ -28,6 +28,18 @@ router.get('/login', (req, res) => {
     res.render('users/login');
 });
 
+router.get('/profile', catchAsync(async (req, res) => {
+    console.log(req.user);
+    const user = await User.findById(req.user._id);
+    // const {user} = req.session.passport;
+    // console.log()；
+    // if (!user) {
+    //     req.flash('error', 'Please log in');
+    //     return res.redirect('/chatrooms');
+    // }
+    res.render('users/profile', {user});
+}));
+
 // router.get('/profile', (req, res) => {
 //     console.log(req);
 //     res.render('users/profile');
