@@ -19,7 +19,6 @@ $(() => {
         if (pair[0] === 'username') username = pair[1];
         if (pair[0] === 'userLanguage') userLanguage = pair[1];
     }
-
     $sendMsgError.hide()
     $sendMsgText.focus(function () {
         $sendMsgError.html("")
