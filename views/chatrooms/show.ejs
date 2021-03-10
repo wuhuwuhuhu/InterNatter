@@ -39,7 +39,7 @@
         <p class="alert alert-danger" role="alert" id="sendMsgError"></p>
         <button type="button" class="btn btn-success" id="sendMsgButton">Send</button>
         <button type="button" class="btn btn-warning" id="clearMsgButton">Clear</button>
-        <button id="senderLanguage" value=<%= userLanguage %> hidden></button>
+        <button id="senderLanguage" value=<%= userLanguage %> style="display:none;"></button>
 
     </div>
     <ul id="messages"></ul>
@@ -49,6 +49,4 @@
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <!-- contains chatroom.js -->
-    <script src="/chatrooms/bundle.js"></script>
-    <script src="/chatrooms/bundle2.js"></script>
+    <script src="/chatrooms/chatrooms.js"></script>

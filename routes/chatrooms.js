@@ -99,15 +99,6 @@ router.get('/:id', catchAsync(async (req, res) => {
     }
   });
 
-  // const port = '4000'
-  // const app = express();
-  // // app.set('port', port);
-  // const server = require('http').createServer(app);
-  // require('../server/socketIO_server')(req.user, server);
-  // server.listen(4000, () => {
-  //   console.log("Serving on port 4000");
-  // })
-
 
   res.render('chatrooms/show', { chatroom, data, username, userLanguage });
 }));

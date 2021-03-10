@@ -2,10 +2,6 @@ const { date } = require('joi');
 
 // const {ChatModel} = require('../db/models')
 module.exports = function (user, server) {
-  // const {username, userLanguage} = require('../utils/readCookie');
-  const session = require('express-session');
-  // console.log(session(Cookie));
-  // console.log(session.cookie);
   //get IO object
   //socket.io v3 requires the cors
   // const io = require('socket.io')(server, {
@@ -23,19 +19,6 @@ module.exports = function (user, server) {
     }
   });
   io.on('connection', function (socket) {
-    
-    // translate
-    const translate = require('../utils/translate/translate').translate;
-    const test = async () => {
-      const a = await translate({
-        text: "hello",
-        from: "en",
-        to: "es"
-        });
-      return a.text;
-    }
-    console.log(test())
-    // console.log(localStorage.getItem('test'));
     
 
     //  socket.emit('receiveMsg', 'Hi, all Clients. Server received')
@@ -55,15 +38,8 @@ module.exports = function (user, server) {
       // io.to(roomId)
       // io.to(roomId).emit('receiveMsg', "hello")
       socket.on("sendMsg", async ({ msg, senderName, senderLang }) => {
-        console.log("user", user);
         io.to(roomId).emit('receiveMsg', { 
           originalMsg: msg, 
-          // translation: await translate({
-          //   text: msg,
-          //   from: senderLang,
-          //   to: user.language
-          // }),
-          translation: "text",
           senderLang: senderLang, 
           sender: senderName, 
           send_time: Date.now() 
