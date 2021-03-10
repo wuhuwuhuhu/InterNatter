@@ -10,7 +10,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 const { resolveSoa } = require('dns');
-const http = require('http');
+// const http = require('http');
 
 // routes
 const userRoutes = require('./routes/users');
@@ -32,12 +32,13 @@ db.once("open", () => {
 
 const app = express();
 
-//
-var port = '4000'
-app.set('port', port);
-var server = http.createServer(app);
-require('./models/socketIO_server')(server)
-server.listen(port);
+// const port = '4000'
+// app.set('port', port);
+// const server = require('http').createServer(app);
+// require('./server/socketIO_server')(server);
+// server.listen(4000, () => {
+//     console.log("Serving on port 4000");
+// })
 
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');

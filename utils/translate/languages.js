@@ -7,7 +7,7 @@
  */
 
 var langs = {
-    'auto': 'Automatic',
+    // 'auto': 'Automatic',
     'af': 'Afrikaans',
     'sq': 'Albanian',
     'am': 'Amharic',
@@ -114,6 +114,7 @@ var langs = {
     'yo': 'Yoruba',
     'zu': 'Zulu'
 };
+
 /**
  * Returns the ISO 639-1 code of the desiredLang – if it is supported by Google Translate
  * @param {string} desiredLang – the name or the code(case sensitive) of the desired language
@@ -149,5 +150,5 @@ function isSupported(desiredLang) {
 }
 
 module.exports = langs;
-module.exports.isSupported = isSupported;
-module.exports.getCode = getCode;
+// module.exports.isSupported = isSupported;
+// module.exports.getCode = getCode;

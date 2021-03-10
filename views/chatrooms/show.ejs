@@ -1,35 +1,54 @@
 <% layout('layouts/boilerplate')%>
 
-<h1> <%= chatroom.title %> </h1>
-<h2> To show: chatbox, memberList </h2>
-<div>
-    <form action="/chatrooms/<%=chatroom._id%>?_method=DELETE" method="POST">
-        <button class="btn btn-danger">Delete</button>
-        <a class="btn btn-secondary" href="/chatrooms/<%=chatroom._id%>/edit" role="button">Edit</a>
-    </form>
-</div>
+    <h1>
+        <%= chatroom.title %>
+    </h1>
+    <h1>
+        <%= username %>
+    </h1>
+    <h2> To show: chatbox, memberList </h2>
+    <div>
+        <form action="/chatrooms/<%=chatroom._id%>?_method=DELETE" method="POST">
+            <button class="btn btn-danger">Delete</button>
+            <a class="btn btn-secondary" href="/chatrooms/<%=chatroom._id%>/edit" role="button">Edit</a>
+        </form>
+    </div>
 
-<div id="chatLog">
-    <% for(let i = 0; i < data.length; i++) {%>
-        <% let chat = data[i]%>
-        <div class="card <%= username === chat.sender? 'myMsg':''%>" >
-            <div class="card-body">
-                <h5 class="card-title"><%= chat.sender %></h5>
-                <h6 class="card-subtitle mb-2 text-muted"><%= new Date(chat.send_time).toLocaleString()%></h6>
-                <p class="card-text"><%= chat.content%></p>
+    <div id="chatLog">
+        <% for(let i=0; i < data.length; i++) {%>
+            <% let chat=data[i]%>
+            <div class="card <%= username === chat.sender? 'myMsg':''%>">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <%= chat.sender %>
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        <%= new Date(chat.send_time).toLocaleString()%>
+                    </h6>
+                    <p class="card-text">
+                        <%= chat.content%>
+                    </p>
+                </div>
             </div>
-        </div>
-    <% } %>
+        <% } %>
 
-</div>
-<div id="sendMsg">
-    <label for="sendMsgText">Send Message</label>
-    <textarea class="form-control" id="sendMsgText" rows="3"></textarea>
-    <p class="alert alert-danger" role="alert" id="sendMsgError"></p>
-    <button type="button" class="btn btn-success" id="sendMsgButton">Send</button>
-    <button type="button" class="btn btn-warning" id="clearMsgButton">Clear</button>
-</div>
-<link rel="stylesheet" type="text/css" href="/chatrooms/chatrooms.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.2/socket.io.js" integrity="sha512-YybopSVjZU0fe8TY4YDuQbP5bhwpGBE/T6eBUEZ0usM72IWBfWrgVI13qfX4V2A/W7Hdqnm7PIOYOwP9YHnICw==" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<script src="/chatrooms/chatrooms.js"></script>
+    </div>
+    <div id="sendMsg">
+        <label for="sendMsgText">Send Message</label>
+        <textarea class="form-control" id="sendMsgText" rows="3" placeholder="Type here..."></textarea>
+        <p class="alert alert-danger" role="alert" id="sendMsgError"></p>
+        <button type="button" class="btn btn-success" id="sendMsgButton">Send</button>
+        <button type="button" class="btn btn-warning" id="clearMsgButton">Clear</button>
+        <button id="senderLanguage" value=<%= userLanguage %> hidden></button>
+
+    </div>
+    <ul id="messages"></ul>
+    <link rel="stylesheet" type="text/css" href="/chatrooms/chatrooms.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.2/socket.io.js"
+        integrity="sha512-YybopSVjZU0fe8TY4YDuQbP5bhwpGBE/T6eBUEZ0usM72IWBfWrgVI13qfX4V2A/W7Hdqnm7PIOYOwP9YHnICw=="
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <!-- contains chatroom.js -->
+    <script src="/chatrooms/bundle.js"></script>
+    <script src="/chatrooms/bundle2.js"></script>

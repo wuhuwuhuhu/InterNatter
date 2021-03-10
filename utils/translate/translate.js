@@ -18,7 +18,7 @@ fail:
 */
 const translator = require('@vitalets/google-translate-api');
 
-translate = async ({text, from, to}) => {
+const translate = async ({text, from, to}) => {
     if(!text || ! to) return {code: 1, msg: "Plese provide text needed to be translated and the target language."};
     code = 0;
     data = "";

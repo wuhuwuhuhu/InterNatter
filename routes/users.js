@@ -3,15 +3,16 @@ const router = express.Router();
 const passport = require('passport');
 const catchAsync = require('../utils/catchAsync');
 const User = require('../models/user');
+const langs = require('../utils/translate/languages')
 
 router.get('/register', (req, res) => {
-    res.render('users/register');
+    res.render('users/register', {langs});
 });
 
 router.post('/register', catchAsync(async (req, res, next) => {
     try {
-        const { email, username, password } = req.body;
-        const user = new User({ email, username });
+        const { email, username, password, language } = req.body;
+        const user = new User({ email, username, language });
         const registeredUser = await User.register(user, password);
         req.login(registeredUser, err => {
             if (err) return next(err);
