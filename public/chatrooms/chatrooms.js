@@ -29,7 +29,7 @@ $(() => {
     const cookies = document.cookie.split(';')
     //Set default language and user name to prevent bad data
     let username = 'Anonymous';
-    let userLanguage = 'en';
+    let userLanguage = "English";
 
     for (let i = 0; i < cookies.length; i++) {
         let pair = cookies[i].split('=')
@@ -65,7 +65,7 @@ $(() => {
             <div class="card-body">
                 <h5 class="card-title">${chat.sender}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">${new Date(chat.send_time).toLocaleString()}</h6>
-                <p class="card-text">Original: ${chat.originalMsg} (Language: ${chat.senderLang})</p>
+                <p class="card-text">Original: ${chat.originalMsg} (Language: ${decodeURI(chat.senderLang)})</p>
                 <p class="card-text"> ${chat.translatedMsg} </p>
             </div>
         </div>`

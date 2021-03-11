@@ -20,6 +20,8 @@ const translator = require('@vitalets/google-translate-api');
 
 const translate = async ({text, from, to}) => {
     if(!text || ! to) return {code: 1, msg: "Plese provide text needed to be translated and the target language."};
+    from = decodeURI(from)
+    to = decodeURI(to)
     code = 0;
     data = "";
     msg = "";

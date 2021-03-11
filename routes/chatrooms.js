@@ -49,7 +49,7 @@ router.get('/:id', catchAsync(async (req, res) => {
   // res.cookie('username','JJ', {maxAge: 1000*60*60*24*7})
 
   const username = req.user === undefined ? 'Anonymous' : req.user.username;
-  const userLanguage = req.user === undefined ? 'en' : req.user.language;
+  const userLanguage = req.user === undefined ? "English" : req.user.language;
   res.cookie('username', username, { maxAge: 1000 * 60 * 60 * 24 * 7 })
   res.cookie('userLanguage', userLanguage, { maxAge: 1000 * 60 * 60 * 24 * 7 })
   const data = [
@@ -57,37 +57,37 @@ router.get('/:id', catchAsync(async (req, res) => {
       "sender": "Jerry",
       "originalMsg": "Hello.",
       "send_time": 1614907034604,
-      "senderLang": "en"
+      "senderLang": "English"
     },
     {
       "sender": "zhao",
       "originalMsg": "Nice to meet you.",
       "send_time": 1614907035620,
-      "senderLang": "en"
+      "senderLang": "English"
     },
     {
       "sender": "John",
       "originalMsg": "Hello.",
       "send_time": 1614907044604,
-      "senderLang": "en"
+      "senderLang": "English"
     },
     {
       "sender": "Mike",
       "originalMsg": "Nice to meet you.",
       "send_time": 1614907134620,
-      "senderLang": "en"
+      "senderLang": "English"
     },
     {
       "sender": "Nicole",
       "originalMsg": "Hello.",
       "send_time": 1614907234604,
-      "senderLang": "en"
+      "senderLang": "English"
     },
     {
       "sender": "whd",
       "originalMsg": "Nice to meet you.",
       "send_time": 1614905034620,
-      "senderLang": "en"
+      "senderLang": "English"
     }
   ]
   for(let i = 0; i < data.length; i++){

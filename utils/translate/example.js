@@ -4,7 +4,7 @@ async function main() {
     let a = await translate({
         text: "hello",
         from: "en",
-        to: "zh-CN"
+        to: "Chinese (Simplified)"
     })
     
     console.log("Translate hello to chinese " + a.text)
