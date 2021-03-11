@@ -4,7 +4,7 @@ const router = express.Router();
 const catchAsync = require('../utils/catchAsync');
 const { chatroomSchema } = require('../schemas.js');
 const { isLoggedIn } = require('../middleware');
-
+const translator = require('../utils/translate/translate').translate;
 const ExpressError = require('../utils/ExpressError');
 const Chatroom = require('../models/chatroom');
 
@@ -34,6 +34,12 @@ router.post('/', isLoggedIn, validateChatroom, catchAsync(async (req, res, next)
   res.redirect(`/chatrooms/${chatroom._id}`);
 }));
 
+router.post('/translate',catchAsync(async(req, res) => {
+  let {originalMsg, senderLang, userLanguage} = req.body
+  let response = await translator({text: originalMsg, from: senderLang, to: userLanguage})
+  res.json(response)
+}));
+
 router.get('/:id', catchAsync(async (req, res) => {
   const chatroom = await Chatroom.findById(req.params.id);
   if (!chatroom) {
@@ -41,44 +47,60 @@ router.get('/:id', catchAsync(async (req, res) => {
     return res.redirect('/chatrooms');
   }
   // res.cookie('username','JJ', {maxAge: 1000*60*60*24*7})
+
+  const username = req.user === undefined ? 'Anonymous' : req.user.username;
+  const userLanguage = req.user === undefined ? 'en' : req.user.language;
+  res.cookie('username', username, { maxAge: 1000 * 60 * 60 * 24 * 7 })
+  res.cookie('userLanguage', userLanguage, { maxAge: 1000 * 60 * 60 * 24 * 7 })
   const data = [
     {
       "sender": "Jerry",
-      "content": "Hello.",
-      "send_time": 1614907034604
+      "originalMsg": "Hello.",
+      "send_time": 1614907034604,
+      "senderLang": "en"
     },
     {
       "sender": "zhao",
-      "content": "Nice to meet you.",
-      "send_time": 1614907035620
+      "originalMsg": "Nice to meet you.",
+      "send_time": 1614907035620,
+      "senderLang": "en"
     },
     {
       "sender": "John",
-      "content": "Hello.",
-      "send_time": 1614907044604
+      "originalMsg": "Hello.",
+      "send_time": 1614907044604,
+      "senderLang": "en"
     },
     {
       "sender": "Mike",
-      "content": "Nice to meet you.",
-      "send_time": 1614907134620
+      "originalMsg": "Nice to meet you.",
+      "send_time": 1614907134620,
+      "senderLang": "en"
     },
     {
       "sender": "Nicole",
-      "content": "Hello.",
-      "send_time": 1614907234604
+      "originalMsg": "Hello.",
+      "send_time": 1614907234604,
+      "senderLang": "en"
     },
     {
       "sender": "whd",
-      "content": "Nice to meet you.",
-      "send_time": 1614905034620
+      "originalMsg": "Nice to meet you.",
+      "send_time": 1614905034620,
+      "senderLang": "en"
     }
   ]
+  for(let i = 0; i < data.length; i++){
+    let msg = data[i]
+    if(userLanguage != msg.senderLang)
+    {
+      let response = await translator({text: msg.originalMsg, from: msg.senderLang, to: userLanguage})
+      msg.translatedMsg = response.text
+    }else{
+      msg.translatedMsg = msg.originalMsg;
+    }
 
-  const username = req.user === undefined ? 'J.Doe' : req.user.username;
-  const userLanguage = req.user === undefined ? 'senderLang' : req.user.language;
-  res.cookie('username', username, { maxAge: 1000 * 60 * 60 * 24 * 7 })
-  res.cookie('userLanguage', userLanguage, { maxAge: 1000 * 60 * 60 * 24 * 7 })
-
+  }
   // check if the server is on
   const port = 4000;
   detect(port, (err, _port) => {

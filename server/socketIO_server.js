@@ -20,23 +20,8 @@ module.exports = function (user, server) {
   });
   io.on('connection', function (socket) {
     
-
-    //  socket.emit('receiveMsg', 'Hi, all Clients. Server received')
     socket.on('join', roomId => {
       socket.join(roomId);
-
-      // translate
-      // socket.on("sendMsg", ({msg, senderName, senderLang}) => {
-      //   io.to(roomId).emit('receiveMsg', {
-      //     Original: msg,
-      //     constent: myTranslate(msg, senderLang),
-      //     sender: sender.username,
-      //     send_time: Date.now()
-      //   });
-      // })
-      // var roster = io.sockets.adapter.rooms.get(roomId);
-      // io.to(roomId)
-      // io.to(roomId).emit('receiveMsg', "hello")
       socket.on("sendMsg", async ({ msg, senderName, senderLang }) => {
         io.to(roomId).emit('receiveMsg', { 
           originalMsg: msg, 

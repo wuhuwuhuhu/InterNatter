@@ -26,7 +26,10 @@
                         <%= new Date(chat.send_time).toLocaleString()%>
                     </h6>
                     <p class="card-text">
-                        <%= chat.content%>
+                        Original: <%=chat.originalMsg%> (Language: <%= chat.senderLang%>)
+                    </p>
+                    <p class="card-text">
+                        <%= chat.translatedMsg%>
                     </p>
                 </div>
             </div>
@@ -39,7 +42,6 @@
         <p class="alert alert-danger" role="alert" id="sendMsgError"></p>
         <button type="button" class="btn btn-success" id="sendMsgButton">Send</button>
         <button type="button" class="btn btn-warning" id="clearMsgButton">Clear</button>
-        <button id="senderLanguage" value=<%= userLanguage %> style="display:none;"></button>
 
     </div>
     <ul id="messages"></ul>
