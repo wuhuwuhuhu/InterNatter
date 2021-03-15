@@ -59,6 +59,7 @@ const sessionConfig = {
     }
 }
 
+
 app.use(session(sessionConfig));
 app.use(flash());
 
@@ -76,6 +77,12 @@ app.use((req, res, next) => {
     res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
+    //clear cookies if user not log in
+    if(!req.isAuthenticated()){
+        res.clearCookie("username");
+        res.clearCookie("userLanguage");
+        res.clearCookie("userId");
+    }
     next();
 });
 
