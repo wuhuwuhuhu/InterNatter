@@ -7,6 +7,7 @@ const { isLoggedIn } = require('../middleware');
 const translator = require('../utils/translate/translate').translate;
 const ExpressError = require('../utils/ExpressError');
 const Chatroom = require('../models/chatroom');
+const Message = require('../models/message');
 
 const validateChatroom = (req, res, next) => {
   const { error } = chatroomSchema.validate(req.body);
@@ -34,11 +35,12 @@ router.post('/', isLoggedIn, validateChatroom, catchAsync(async (req, res, next)
   res.redirect(`/chatrooms/${chatroom._id}`);
 }));
 
-router.post('/translate',catchAsync(async(req, res) => {
-  let {originalMsg, senderLang, userLanguage} = req.body
-  let response = await translator({text: originalMsg, from: senderLang, to: userLanguage})
-  res.json(response)
-}));
+router.get('/getMessage', async(req, res) => {
+  
+  let {messageId ,senderName, userLanguage} = req.query;
+  let response = await Message.getMessage(messageId, senderName, userLanguage);
+  return res.json(response);
+});
 
 router.get('/:id', catchAsync(async (req, res) => {
   const chatroom = await Chatroom.findById(req.params.id);
@@ -46,61 +48,10 @@ router.get('/:id', catchAsync(async (req, res) => {
     req.flash('error', 'Cannot find that chatroom');
     return res.redirect('/chatrooms');
   }
-  // res.cookie('username','JJ', {maxAge: 1000*60*60*24*7})
-
-  const username = req.user === undefined ? 'Anonymous' : req.user.username;
+  const username = req.user === undefined ? 'Anonymous User' : req.user.username;
   const userLanguage = req.user === undefined ? "English" : req.user.language;
-  res.cookie('username', username, { maxAge: 1000 * 60 * 60 * 24 * 7 })
-  res.cookie('userLanguage', userLanguage, { maxAge: 1000 * 60 * 60 * 24 * 7 })
-  const data = [
-    {
-      "sender": "Jerry",
-      "originalMsg": "Hello.",
-      "send_time": 1614907034604,
-      "senderLang": "English"
-    },
-    {
-      "sender": "zhao",
-      "originalMsg": "Nice to meet you.",
-      "send_time": 1614907035620,
-      "senderLang": "English"
-    },
-    {
-      "sender": "John",
-      "originalMsg": "Hello.",
-      "send_time": 1614907044604,
-      "senderLang": "English"
-    },
-    {
-      "sender": "Mike",
-      "originalMsg": "Nice to meet you.",
-      "send_time": 1614907134620,
-      "senderLang": "English"
-    },
-    {
-      "sender": "Nicole",
-      "originalMsg": "Hello.",
-      "send_time": 1614907234604,
-      "senderLang": "English"
-    },
-    {
-      "sender": "whd",
-      "originalMsg": "Nice to meet you.",
-      "send_time": 1614905034620,
-      "senderLang": "English"
-    }
-  ]
-  for(let i = 0; i < data.length; i++){
-    let msg = data[i]
-    if(userLanguage != msg.senderLang)
-    {
-      let response = await translator({text: msg.originalMsg, from: msg.senderLang, to: userLanguage})
-      msg.translatedMsg = response.text
-    }else{
-      msg.translatedMsg = msg.originalMsg;
-    }
 
-  }
+  const data = await Message.getChatroomLog(chatroom.id, userLanguage)
   // check if the server is on
   const port = 4000;
   detect(port, (err, _port) => {

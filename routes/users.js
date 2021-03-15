@@ -16,6 +16,9 @@ router.post('/register', catchAsync(async (req, res, next) => {
         const registeredUser = await User.register(user, password);
         req.login(registeredUser, err => {
             if (err) return next(err);
+            res.cookie('username', req.user.username, { maxAge: 1000 * 60 * 60 * 24 * 7 })
+            res.cookie('userLanguage', req.user.language, { maxAge: 1000 * 60 * 60 * 24 * 7 })
+            res.cookie('userId', JSON.stringify(req.user._id), { maxAge: 1000 * 60 * 60 * 24 * 7 })
             req.flash('success', "Welcome to InterNatter");
             res.redirect('/chatrooms');
         })
@@ -34,6 +37,9 @@ router.get('/profile', (req, res) => {
 });
 
 router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {
+    res.cookie('username', req.user.username, { maxAge: 1000 * 60 * 60 * 24 * 7 })
+    res.cookie('userLanguage', req.user.language, { maxAge: 1000 * 60 * 60 * 24 * 7 })
+    res.cookie('userId', JSON.stringify(req.user._id), { maxAge: 1000 * 60 * 60 * 24 * 7 })
     req.flash('success', 'Welcome Back!');
     const redirectUrl = req.session.returnTo || '/chatrooms'; 
     delete req.session.returnTo;
@@ -45,6 +51,7 @@ router.get('/logout', (req, res) => {
     req.flash('success', "Goodbye!");
     res.clearCookie("username");
     res.clearCookie("userLanguage");
+    res.clearCookie("userId");
     res.redirect('/chatrooms');
 });
 

@@ -17,16 +17,16 @@
     <div id="chatLog">
         <% for(let i=0; i < data.length; i++) {%>
             <% let chat=data[i]%>
-            <div class="card <%= username === chat.sender? 'myMsg':''%>">
+            <div class="card <%= username === chat.senderName? 'myMsg':''%>">
                 <div class="card-body">
                     <h5 class="card-title">
-                        <%= chat.sender %>
+                        <%= chat.senderName %>
                     </h5>
                     <h6 class="card-subtitle mb-2 text-muted">
-                        <%= new Date(chat.send_time).toLocaleString()%>
+                        <%= new Date(chat.sendTime).toLocaleString()%>
                     </h6>
                     <p class="card-text">
-                        Original: <%=chat.originalMsg%> (Language: <%= decodeURI(chat.senderLang)%>)
+                        Original: <%=chat.originalMsg%> (Language: <%= decodeURI(chat.originalLanguage)%>)
                     </p>
                     <p class="card-text">
                         <%= chat.translatedMsg%>
