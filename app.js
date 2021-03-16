@@ -15,7 +15,7 @@ const { resolveSoa } = require('dns');
 // routes
 const userRoutes = require('./routes/users');
 const chatroomRoutes = require('./routes/chatrooms');
-
+const validateRoutes = require('./routes/validate');
 // connect mongoDB
 mongoose.connect('mongodb://localhost:27017/InterNatter', {
     useNewUrlParser: true,
@@ -88,6 +88,7 @@ app.use((req, res, next) => {
 
 app.use('/', userRoutes);
 app.use('/chatrooms', chatroomRoutes);
+app.use('/validate', validateRoutes);
 
 app.get('/', (req, res) => {
     res.render('home');
