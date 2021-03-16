@@ -95,6 +95,7 @@ router.put('/:id', isLoggedIn, validateChatroom, catchAsync(async (req, res) => 
 router.delete('/:id', isLoggedIn, catchAsync(async (req, res) => {
   const { id } = req.params;
   await Chatroom.findByIdAndDelete(id);
+  await Message.deleteMany({receiver: id })
   req.flash('success', "Successfully dismiss the chatroom!");
   res.redirect('/chatrooms');
 }));
