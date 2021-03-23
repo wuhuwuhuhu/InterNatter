@@ -1,28 +1,112 @@
-.hero {
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
-    text-align: center;
+body {
+  font-family: 'Montserrat', sans-serif;
 }
 
-.profile {
-    width: 70%;
-    box-shadow: 0 0 3px 0 #8c1829;
-    background: white;
-    padding: 20px;
-    margin: 8% auto;
+
+.hero h1{
     text-align: left;
-    margin: 5% 15%;
-  }
+    color: white;
+    font-size: 100px;
+    font-weight: bolder;
+    margin-top: 70px;
+    margin-left: 40px;
+}
+
+.hero p {
+  text-align: left;
+  color: white;
+  font-size: 30px;
+  font-weight: lighter;
+  margin-top: 10px;
+  margin-left: 40px;
+}
   
-  .profile h1 {
-    color: #8c1829;
-    margin-bottom: 30px;
-  }
-  
-  .profile-info {
+.profile-info {
     padding: 12px;
     margin: 12px 0;
     width: 100%;
     outline: none;
     font-size: 20px;
-    color: #8c1829;
+    color: white;
   }
+
+.profile {
+    width: 50%;
+    box-shadow: 0 0 30px 0 #057996;
+    background: #00000057;;
+    padding: 50px;
+    margin: 0 auto;
+    text-align: left; 
+}
+
+.profile h1 {
+  color: white;
+  font-weight: 700;
+  text-align: center;
+  padding-bottom: 40px;
+  text-transform: uppercase;
+}
+
+.nav-link {
+  color: white;
+}
+
+.login {
+    width: 30%;
+    box-shadow: 0 0 30px 0 #057996;
+    background: #00000057;;
+    padding: 50px;
+    margin: 0 auto;
+    text-align: left; 
+}
+
+.login h1 {
+  color: white;
+  font-weight: 700;
+  text-align: center;
+  padding-bottom: 40px;
+}
+
+.login label {
+  color: white;
+  font-weight: bold;
+}
+
+.login button {
+  background-color: #043527c9;
+  margin-top: 20px;
+  align-self: center;
+  border: none;
+}
+
+.register {
+  box-shadow: 0 0 30px 0 #057996;
+  background: #00000057;;
+  padding: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+}
+
+.register h1 {
+color: white;
+font-size: 40px;
+font-weight: 700;
+text-align: center;
+padding-bottom: 40px;
+}
+
+.register label {
+color: white;
+font-weight: bold;
+}
+
+.register button {
+background-color: #043527c9;
+margin-top: 20px;
+border: none;
+}

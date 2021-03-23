@@ -1,5 +1,6 @@
 <% layout('layouts/boilerplate')%>
-    <h1>Register</h1>
+
+    <!-- <h1>Register</h1>
     <form action="/register" method="POST"  class="validated-form" id="registerForm" novalidate>
         <div class="mb-3">
             <label class="form-label" for="username">Username</label>
@@ -54,4 +55,73 @@
         <button class="btn btn-success" id="registerButton">Register</button>
 
     </form>
+    <script src="/users/register.js"></script> -->
+
+
+<div class="register">
+
+    <h1>Register</h1>
+
+    <form action="/register" method="POST"  class="validated-form" id="registerForm" novalidate>
+        
+    <div class="mb-3">
+        <label class="form-label" for="username">Username</label>
+        <input class="form-control" type="text" id="username" name="username" required>
+        <!-- <small class="form-text text-muted">Betwee 3 - 16, Valid characters: "a-z", "A-Z", "0-9", "_" and
+                "-"</small>
+        <p class="alert alert-danger" role="alert" id="usernameAlert"></p>
+        <div class="valid-feedback">
+            Looks good!
+        </div> -->
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label" for="email">Email</label>
+        <input class="form-control" type="email" id="email" name="email" required>
+        <!-- <p class="alert alert-danger" role="alert" id="emailAlert"></p>
+        <div class="valid-feedback">
+            Looks good!
+        </div> -->
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label" for="password">Password</label>
+        <input class="form-control" type="password" id="password" name="password" required>
+        <!-- <small class="form-text text-muted">Betwee 3 - 16, Valid characters: "a-z", "A-Z", "0-9", "_" and
+                "-"</small>
+        <p class="alert alert-danger" role="alert" id="passwordAlert"></p>
+        <div class="valid-feedback">
+            Looks good!
+        </div> -->
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label" for="password2">Password Again</label>
+        <input class="form-control" type="password" id="password2" name="password2" required>
+        <!-- <p class="alert alert-danger" role="alert" id="password2Alert"></p>
+        <div class="valid-feedback">
+            Looks good!
+        </div> -->
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label" for="language">Language</label>
+        <select class="custom-select" id="language" name="language">
+            <% for (const lang in langs) { %>
+                <option value="<%= langs[lang] %>" <%= langs[lang] == "English"?"selected":"" %>>
+                        <%= langs[lang] %> 
+                    </option>
+            <% } %>
+        </select>
+        <!-- <div class="valid-feedback">
+            Looks good!
+        </div> -->
+    </div>
+        
+    <p class="alert" role="alert" id="registerAlert"></p>
+        <button class="btn btn-success" id="registerButton">Register</button>
+
+    </form>
     <script src="/users/register.js"></script>
+
+</div>
