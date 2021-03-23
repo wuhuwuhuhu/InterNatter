@@ -30,6 +30,7 @@ router.get('/new', isLoggedIn, (req, res) => {
 
 router.post('/', isLoggedIn, validateChatroom, catchAsync(async (req, res, next) => {
   const chatroom = new Chatroom(req.body.chatroom);
+  chatroom.creator = req.user._id;
   await chatroom.save();
   req.flash('success', "Successfully opened a new chatroom!");
   res.redirect(`/chatrooms/${chatroom._id}`);
@@ -43,7 +44,7 @@ router.get('/getMessage', async(req, res) => {
 });
 
 router.get('/:id', catchAsync(async (req, res) => {
-  const chatroom = await Chatroom.findById(req.params.id);
+  const chatroom = await Chatroom.findById(req.params.id).populate('creator');
   if (!chatroom) {
     req.flash('error', 'Cannot find that chatroom');
     return res.redirect('/chatrooms');

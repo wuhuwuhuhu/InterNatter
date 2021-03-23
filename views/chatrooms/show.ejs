@@ -3,16 +3,21 @@
     <h1>
         <%= chatroom.title %>
     </h1>
-    <h1>
-        <%= username %>
-    </h1>
+    <h2>
+        Created by <%= chatroom.creator.username %>
+    </h2>
+    <h2>
+        Welcome, <%= username %>
+    </h2>
     <h2> To show: chatbox, memberList </h2>
+    <% if(currentUser && chatroom.creator.equals(currentUser._id)) { %>
     <div>
         <form action="/chatrooms/<%=chatroom._id%>?_method=DELETE" method="POST">
             <button class="btn btn-danger">Delete</button>
             <a class="btn btn-secondary" href="/chatrooms/<%=chatroom._id%>/edit" role="button">Edit</a>
         </form>
     </div>
+    <% } %>
 
     <div id="chatLog">
         <% for(let i=0; i < data.length; i++) {%>
