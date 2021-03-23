@@ -3,7 +3,9 @@ const router = express.Router();
 const passport = require('passport');
 const catchAsync = require('../utils/catchAsync');
 const User = require('../models/user');
+const friendList = require('../models/friendlist')
 const langs = require('../utils/translate/languages')
+var friends = require("mongoose-friends")
 
 router.get('/register', (req, res) => {
     res.render('users/register', {langs});
@@ -27,6 +29,49 @@ router.post('/register', catchAsync(async (req, res, next) => {
         res.redirect('register');
     }
 }));
+
+
+router.post('/profile', catchAsync(async (req, res, next)=>{
+    
+
+    const user = await User
+    
+
+    user.findById(req.body.friendlist, async function(err, result) {
+        if (err) {
+          console.log(req.body.friendlist +"Error: user doesnt exist");
+          res.redirect("profile")
+        } else {
+            var newfriend = await user.findById(req.body.friendlist)
+
+            if(newfriend !=null){
+
+                var friendlist = await friendList
+
+                var friendinlist  = await friendlist.exists({userId:req.user._id, friendId:newfriend._id})
+
+                if(friendinlist){
+                    console.log("user already in friendlist")
+                }
+                else{
+                        var friend = new friendList({userId:req.user._id, username: req.user.username,friendId:newfriend._id,friendname:newfriend.username })
+                            
+                        friend.save(function (err, friend) {
+                            if (err) return console.error(err);
+                            console.log(newfriend.username+" added to friendlist.");
+                        });
+                }
+                    
+            }
+             else{
+                console.log('error:invalid input')
+            }
+                
+            res.redirect("profile")     
+        }
+      });
+
+}))
 
 router.get('/login', (req, res) => {
     res.render('users/login');

@@ -24,7 +24,20 @@
   
 
         <dt class="profile-info">Language: <%=user.language%><dt> 
-
+        
+        
+            <form action="/profile" method="POST" class="validated-form" novalidate>
+                <div class="mb-3">
+                    <label class="form-label" for="friendlist">Add Friend:</label>
+                    <input class="form-control" type="text" id="friendlist" name="friendlist" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                
+                <button class="btn btn-success">Login</button>
+            </form>
+        
       
     </dl>
 
