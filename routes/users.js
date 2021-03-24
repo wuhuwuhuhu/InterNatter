@@ -34,7 +34,7 @@ router.post('/register', catchAsync(async (req, res, next) => {
 router.post('/profile', catchAsync(async (req, res, next)=>{
     
 
-    const user = await User
+    const user = await User 
     
 
     user.findById(req.body.friendlist, async function(err, result) {
@@ -77,9 +77,33 @@ router.get('/login', (req, res) => {
     res.render('users/login');
 });
 
-router.get('/profile', (req, res) => {
-    res.render('users/profile', {user: req.user});
-});
+router.get('/profile',catchAsync(async (req, res) => {
+
+    const friendlist = await friendList
+
+    friendlist.find({friendId:req.user._id}, function(err, data){
+        if(err){
+            console.log(err);
+            return
+        }
+    
+        if(data.length == 0) {
+            console.log("No record found")
+            res.render('users/profile', {user: req.user,friend: data})
+            return
+        }
+        for(i = 0;i<data.length;i++){
+        console.log(data[i].username);
+        console.log(data[i].userId)
+    }
+        res.render('users/profile', {user: req.user, friend: data})
+    })
+    //const friendrequest = friendlist.find({friendId:req.user._id })
+    //console.log(friendrequest.username)
+    
+
+    
+}));
 
 router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {
     res.cookie('username', req.user.username, { maxAge: 1000 * 60 * 60 * 24 * 7 })

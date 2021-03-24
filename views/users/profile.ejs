@@ -37,7 +37,13 @@
                 
                 <button class="btn btn-success">Login</button>
             </form>
-        
+                <h2>Friend  request pending</h2>
+                <% for (var i in friend) { %>
+                    <h3>New friend request</h3>
+                    <h3>name:<%= friend[i].username %></h3>
+                    <h3>id:<%= friend[i].userId %></h3>
+                    <h3></h3>
+                <% } %>
       
     </dl>
 
