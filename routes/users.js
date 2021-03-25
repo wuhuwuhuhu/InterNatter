@@ -105,6 +105,14 @@ router.get('/profile',catchAsync(async (req, res) => {
     
 }));
 
+router.post('/users/friendRequestProcess', catchAsync(async (req, res, next)=>{
+    let {accept, friendListId, userId, friendId} = req.body;
+    /*
+    accept : true / false
+    */
+    console.log("get friendRequestProcess request", req.body);
+}));
+
 router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {
     res.cookie('username', req.user.username, { maxAge: 1000 * 60 * 60 * 24 * 7 })
     res.cookie('userLanguage', req.user.language, { maxAge: 1000 * 60 * 60 * 24 * 7 })
