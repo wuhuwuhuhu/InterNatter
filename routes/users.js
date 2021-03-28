@@ -5,7 +5,7 @@ const catchAsync = require('../utils/catchAsync');
 const User = require('../models/user');
 const friendList = require('../models/friendlist')
 const langs = require('../utils/translate/languages')
-var friends = require("mongoose-friends")
+const userFriends =  require('../models/friend')
 
 router.get('/register', (req, res) => {
     res.render('users/register', {langs});
@@ -106,7 +106,42 @@ router.get('/profile',catchAsync(async (req, res) => {
 }));
 
 router.post('/users/friendRequestProcess', catchAsync(async (req, res, next)=>{
-    let {accept, friendListId, userId, friendId} = req.body;
+    let {accept, friendListId, userId, friendId, username, friendname} = req.body;
+
+    
+    
+    if(accept == "true"){
+        var arr = [{userId: friendId,username:friendname, friendId: userId, friendname:username}, {userId: userId,username:username, friendId: friendId, friendname:friendname}]
+        userFriends.insertMany(arr,function (err, friend) {
+            if (err) return console.error(err);
+            console.log(username +" is now your friend ");
+          }); 
+        
+
+          await friendList.deleteOne({"userId": userId,"friendId": friendId}, function(err, result){
+              if(err){
+                  res.send(err)
+              }
+              else{
+                  console.log(userId + ", " + friendId +" is deleated")
+              }
+          })
+          res.render('users/profile', {user: req.user, friend: data})
+    }
+    if(accept == "false"){
+        console.log(username + "did not accept your friend request ")
+        await friendList.deleteOne({"userId": userId,"friendId": friendId}, function(err, result){
+            if(err){
+                res.send(err)
+            }
+            else{
+                console.log(userId + " " + friendId + "done")
+            }
+        })
+        res.render('users/profile', {user: req.user, friend: data})
+    }
+
+    
     /*
     accept : true / false
     */

@@ -41,7 +41,7 @@
             <dt class="profile-info">Friend  request</dt>
             <% for (var i in friend) { %>
                 <div class="card text-center">
-                    <div class="card-body" friendlistId="<%= friend[i]._id %>" userId="<%= friend[i].userId %>" friendId="<%= friend[i].friendId %>">
+                    <div class="card-body" friendlistId="<%= friend[i]._id %>" userId="<%= friend[i].userId %>" friendId="<%= friend[i].friendId %>" username="<%= friend[i].username %>" friendname ="<%= friend[i].friendname %>" >
                         <h5 class="card-title"><%= friend[i].username %></h5>
                         <a href="#" class="btn btn-success btn-sm friend_request_accept">Accept</a>
                         <a href="#" class="btn btn-danger btn-sm friend_request_decline">Decline</a>

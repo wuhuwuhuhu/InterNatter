@@ -7,6 +7,8 @@ $(() => {
             friendlistId: $card.attr("friendlistId"),
             userId : $card.attr("userId"),
             friendId: $card.attr("friendId"),
+            username: $card.attr("username"),
+            friendname: $card.attr("friendname")
 
         }
         $.post("/users/friendRequestProcess", data, function (responseMessage) {
@@ -30,6 +32,8 @@ $(() => {
             friendlistId: $card.attr("friendlistId"),
             userId : $card.attr("userId"),
             friendId: $card.attr("friendId"),
+            username: $card.attr("username"),
+            friendname: $card.attr("friendname")
         }
         $.post("/users/friendRequestProcess", data, function (responseMessage) {
             if(responseMessage.code == 0){
