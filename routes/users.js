@@ -96,8 +96,8 @@ router.get('/profile',catchAsync(async (req, res) => {
         console.log(data[i].username);
         console.log(data[i].userId)
     }
-        res.render('users/profile', {user: req.user, friend: data})
-    })
+    res.render('users/profile', {user: req.user,  friend: data})
+    })    
     //const friendrequest = friendlist.find({friendId:req.user._id })
     //console.log(friendrequest.username)
     
@@ -146,6 +146,30 @@ router.post('/users/friendRequestProcess', catchAsync(async (req, res, next)=>{
     accept : true / false
     */
     console.log("get friendRequestProcess request", req.body);
+}));
+
+router.get('/friend',catchAsync(async (req, res) => {
+    const userfriend = await userFriends
+
+    userfriend.find({userId:req.user._id}, function(err, data2){
+        if(err){
+            console.log(err);
+            return
+        }
+    
+        if(data2.length == 0) {
+            console.log("No record found")
+            res.render('users/profile', {user: req.user,friend: data})
+            return
+        }
+        for(i = 0;i<data2.length;i++){
+        console.log(data2[i].username);
+        console.log(data2[i].userId)
+    }
+    res.render('users/friend', {user: req.user,  friends: data2})
+        
+    })
+
 }));
 
 router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {
