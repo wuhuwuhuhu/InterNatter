@@ -69,5 +69,16 @@ $(() => {
         $('#chatLog').append(newCard);
     }
 
+    const $emojis = $('#emojis');
+    const $emoji = $('.emoji');
+    $emojis.hide();
+    $('#buttonEmoji').click(() => {
+        $emojis.slideToggle();
+    })
+
+    $emojis.click((event) => {
+        let value = event.target.innerHTML
+        $sendMsgText.val($sendMsgText.val() + value); 
+    })
 
 })
