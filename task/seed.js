@@ -53,15 +53,15 @@ const main = async () => {
         },
         {
           "sender": "Nicole",
-          "originalMsg": "Hello.",
+          "originalMsg": "Bonjour je suis francais",
           "send_time": 1614907234604,
-          "senderLang": "English"
+          "senderLang": "French"
         },
         {
           "sender": "whd",
-          "originalMsg": "Nice to meet you.",
+          "originalMsg": "很高兴见到你",
           "send_time": 1614905034620,
-          "senderLang": "English"
+          "senderLang": "Chinese (Simplified)"
         }
       ]
     let created = true; // this variable is used to add one creator to the chatroom.
