@@ -3,7 +3,8 @@ const Message = User = require('../models/message');
 module.exports = function (user, server) {
   const io = require('socket.io')(server, {
     cors: {
-      origin: "http://localhost:3000",
+      origin: "*",
+      //accept request from all ip
       methods: ["GET", "POST"]
     }
   });
