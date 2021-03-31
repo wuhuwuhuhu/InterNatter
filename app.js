@@ -107,6 +107,7 @@ app.use((err, req, res, next) => {
 })
 
 // app run at localhost:3000
+// run at port 80 at deployment
 app.listen(3000, () => {
     console.log("Server is connected.");
     console.log("Visit http://localhost:3000/")

@@ -9,6 +9,8 @@ $(() => {
     if you want to test on another device, change the ip to your server ip.
     for example:
     const socket = io.connect(`http://192.168.31.59:4000`)
+    for deployment at ECS:
+    const socket = io('http://104.194.73.106:4000')
     */
     socket.on('connect', function() {
         const sessionID = socket.id;
