@@ -5,7 +5,7 @@ const catchAsync = require('../utils/catchAsync');
 const User = require('../models/user');
 const friendList = require('../models/friendlist')
 const langs = require('../utils/translate/languages')
-var friends = require("mongoose-friends")
+const userFriends =  require('../models/friend')
 
 router.get('/register', (req, res) => {
     res.render('users/register', {langs});
@@ -34,7 +34,7 @@ router.post('/register', catchAsync(async (req, res, next) => {
 router.post('/profile', catchAsync(async (req, res, next)=>{
     
 
-    const user = await User
+    const user = await User 
     
 
     user.findById(req.body.friendlist, async function(err, result) {
@@ -77,9 +77,100 @@ router.get('/login', (req, res) => {
     res.render('users/login');
 });
 
-router.get('/profile', (req, res) => {
-    res.render('users/profile', {user: req.user});
-});
+router.get('/profile',catchAsync(async (req, res) => {
+
+    const friendlist = await friendList
+
+    friendlist.find({friendId:req.user._id}, function(err, data){
+        if(err){
+            console.log(err);
+            return
+        }
+    
+        if(data.length == 0) {
+            console.log("No record found")
+            res.render('users/profile', {user: req.user,friend: data})
+            return
+        }
+        for(i = 0;i<data.length;i++){
+        console.log(data[i].username);
+        console.log(data[i].userId)
+    }
+    res.render('users/profile', {user: req.user,  friend: data})
+    })    
+    //const friendrequest = friendlist.find({friendId:req.user._id })
+    //console.log(friendrequest.username)
+    
+
+    
+}));
+
+router.post('/users/friendRequestProcess', catchAsync(async (req, res, next)=>{
+    let {accept, friendListId, userId, friendId, username, friendname} = req.body;
+
+    
+    
+    if(accept == "true"){
+        var arr = [{userId: friendId,username:friendname, friendId: userId, friendname:username}, {userId: userId,username:username, friendId: friendId, friendname:friendname}]
+        userFriends.insertMany(arr,function (err, friend) {
+            if (err) return console.error(err);
+            console.log(username +" is now your friend ");
+          }); 
+        
+
+          await friendList.deleteOne({"userId": userId,"friendId": friendId}, function(err, result){
+              if(err){
+                  res.send(err)
+              }
+              else{
+                  console.log(userId + ", " + friendId +" is deleated")
+              }
+          })
+          res.render('users/profile', {user: req.user, friend: data})
+    }
+    if(accept == "false"){
+        console.log(username + "did not accept your friend request ")
+        await friendList.deleteOne({"userId": userId,"friendId": friendId}, function(err, result){
+            if(err){
+                res.send(err)
+            }
+            else{
+                console.log(userId + " " + friendId + "done")
+            }
+        })
+        res.render('users/profile', {user: req.user, friend: data})
+    }
+
+    
+    /*
+    accept : true / false
+    */
+    console.log("get friendRequestProcess request", req.body);
+}));
+
+router.get('/friend',catchAsync(async (req, res) => {
+    const userfriend = await userFriends
+
+    userfriend.find({userId:req.user._id}, function(err, data2){
+        if(err){
+            console.log(err);
+            return
+        }
+    
+        if(data2.length == 0) {
+            console.log("No record found")
+            res.render('users/profile', {user: req.user,friend: data})
+            return
+        }
+        for(i = 0;i<data2.length;i++){
+        console.log(data2[i].username);
+        console.log(data2[i].userId)
+    }
+    res.render('users/friend', {user: req.user,  friends: data2})
+        
+    })
+
+}));
 
 router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {
     res.cookie('username', req.user.username, { maxAge: 1000 * 60 * 60 * 24 * 7 })

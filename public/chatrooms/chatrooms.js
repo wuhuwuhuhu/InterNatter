@@ -5,7 +5,13 @@ $(() => {
     const $sendMsgText = $('#sendMsgText')
     const roomId = document.location.pathname.match(/[0-9a-fA-F]{24}/)[0]
     const socket = io.connect(`http://localhost:4000`)
-    
+    /*
+    if you want to test on another device, change the ip to your server ip.
+    for example:
+    const socket = io.connect(`http://192.168.31.59:4000`)
+    for deployment at ECS:
+    const socket = io('http://104.194.73.106:4000')
+    */
     socket.on('connect', function() {
         const sessionID = socket.id;
         if(!username){
@@ -69,5 +75,16 @@ $(() => {
         $('#chatLog').append(newCard);
     }
 
+    const $emojis = $('#emojis');
+    const $emoji = $('.emoji');
+    $emojis.hide();
+    $('#buttonEmoji').click(() => {
+        $emojis.slideToggle();
+    })
+
+    $emojis.click((event) => {
+        let value = event.target.innerHTML
+        $sendMsgText.val($sendMsgText.val() + value); 
+    })
 
 })

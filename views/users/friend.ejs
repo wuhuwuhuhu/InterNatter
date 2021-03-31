@@ -1,0 +1,39 @@
+        <% layout('layouts/boilerplate')%>
+<!-- <h1>Profile</h1> -->
+
+<!-- <div class="mb-3">
+    <label class="form-label" for="username">Username: <%=user.username%></label>
+</div>
+<div class="mb-3">
+    <label class="form-label" for="email">Email: <%=user.email%></label>
+</div>
+<div class="mb-3">
+    <label class="form-label" for="language">Language: <%=user.language%></label>
+</div> -->
+
+<div class="profile">
+
+    <h1>Account Details</h1>  
+
+    <dl> 
+        
+        <dt class="profile-info">Username: <%=user.username%></dt>
+     
+
+        <dt class="profile-info">Email: <%=user.email%></dt>
+  
+
+        <dt class="profile-info">Language: <%=user.language%></dt>
+        
+        <dt class="profile-info">
+        </dt>
+            <<dt class="profile-info">Friends</dt>
+        
+            <% for (var n in friends) { %>
+                <h3>friend</h3>
+                <h3> Name:<%= friends[n].friendname %></h3>
+                <h3>id:<%= friends[n].friendId %></h3>
+            <% } %>
+         
+       
+</div>

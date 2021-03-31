@@ -24,3 +24,7 @@
     margin-top: 30px;
     margin-bottom: 60px;
 }
+#emojis>table{
+    background-color: aliceblue;
+    font-size: 1.6em;
+}
