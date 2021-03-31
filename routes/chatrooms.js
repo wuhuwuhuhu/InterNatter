@@ -8,6 +8,9 @@ const translator = require('../utils/translate/translate').translate;
 const ExpressError = require('../utils/ExpressError');
 const Chatroom = require('../models/chatroom');
 const Message = require('../models/message');
+const multer = require('multer');
+const { storage } = require('../cloudinary');
+const upload = multer({ storage });
 
 const validateChatroom = (req, res, next) => {
   const { error } = chatroomSchema.validate(req.body);
@@ -28,9 +31,11 @@ router.get('/new', isLoggedIn, (req, res) => {
   res.render('chatrooms/new');
 });
 
-router.post('/', isLoggedIn, validateChatroom, catchAsync(async (req, res, next) => {
+router.post('/', isLoggedIn, upload.array('image'), validateChatroom, catchAsync(async (req, res, next) => {
   const chatroom = new Chatroom(req.body.chatroom);
   chatroom.creator = req.user._id;
+  chatroom.image = req.files[0].path;
+  // chatroom.image.filename = req.files[0].filename;
   await chatroom.save();
   req.flash('success', "Successfully opened a new chatroom!");
   res.redirect(`/chatrooms/${chatroom._id}`);
@@ -86,9 +91,14 @@ router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res) => {
   res.render('chatrooms/edit', { chatroom });
 }));
 
-router.put('/:id', isLoggedIn, validateChatroom, catchAsync(async (req, res) => {
+router.put('/:id', isLoggedIn, upload.array('image'), validateChatroom, catchAsync(async (req, res) => {
   const { id } = req.params;
   const chatroom = await Chatroom.findByIdAndUpdate(id, { ...req.body.chatroom });
+  if (req.files.length !== 0) {
+    chatroom.image = req.files[0].path;
+    // chatroom.image.filename = req.files[0].filename;
+    await chatroom.save();
+  }
   req.flash('success', "Successfully updated chatroom!");
   res.redirect(`/chatrooms/${chatroom._id}`);
 }));

@@ -2,7 +2,7 @@
 <div class="row">
     <h1 class="text-center">Edit Chatroom</h1>
     <div class="col-6 offset-3">
-        <form action="/chatrooms/<%=chatroom._id%>?_method=PUT" method="POST" novalidate class="validated-form">
+        <form action="/chatrooms/<%=chatroom._id%>?_method=PUT" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
             <div class="mb-3">
                 <label class="form-label" for="title">Title</label>
                 <input class="form-control" type="text" id="title" name="chatroom[title]"
@@ -11,20 +11,30 @@
                     Looks good!
                 </div>
             </div>
-            <div class="mb-3">
-                <label class="form-label" for="image">Image Url</label>
+            <!-- <div class="mb-3">
+                <label class="form-label" for="image">Add an image</label>
                 <input class="form-control" type="text" id="image" name="chatroom[image]"
                     value="<%=chatroom.image %>" required>
                 <div class="valid-feedback">
                     Looks good!
                 </div>
-            </div>
+            </div> -->
+            <!-- <input type="file" name="image" id=""> -->
             <div class="mb-3">
                 <label class="form-label" for="description">Description</label>
                 <textarea class="form-control" type="text" id="description" name="chatroom[description]"
                     required><%= chatroom.description%></textarea>
                 <div class="valid-feedback">
                     Looks good!
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="form-file custom-file">
+                    <input type="file" class="form-file-input" id="image" name="image">
+                    <label class="form-file-label" for="image">
+                        <span class="form-file-text custom-file-label">Choose an image</span>
+                        <span class="form-file-button">Browse</span>
+                    </label>
                 </div>
             </div>
             <div class="mb-3">
