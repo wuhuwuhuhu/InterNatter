@@ -1,24 +1,26 @@
 <div class="row" style="height: 100%;">
     <%- include('./index')%>
 
-    <div  class="col-md-6">
-        <h1>
-            <%= chatroom.title %>
-        </h1>
-        <h2>
-            Created by <%= chatroom.creator.username %>
-        </h2>
-        <h2>
-            Welcome, <%= username %>
-        </h2>
-        <% if(currentUser && chatroom.creator.equals(currentUser._id)) { %>
-        <div>
-            <form action="/chatrooms/<%=chatroom._id%>?_method=DELETE" method="POST">
-                <button class="btn btn-danger">Delete</button>
-                <a class="btn btn-secondary" href="/chatrooms/<%=chatroom._id%>/edit" role="button">Edit</a>
-            </form>
+    <div  class="col-md-9" id="chatroom">
+        <div class="row" id="chatroomInfo">
+            <div class="col-md-2">
+                <img class="img-fluid" alt="" src="<%=chatroom.image%>">
+            </div>
+            <div class="col-md-10" id="chatroomInfoText">
+                    <h4><%= chatroom.title %> </h4>
+                    <p><%= chatroom.description %></p>
+                    <% if(currentUser && chatroom.creator.equals(currentUser._id)) { %>
+                        <div>
+                            <form action="/chatrooms/<%=chatroom._id%>?_method=DELETE" method="POST">
+                                <button class="btn btn-danger">Delete</button>
+                                <a class="btn btn-secondary" href="/chatrooms/<%=chatroom._id%>/edit" role="button">Edit</a>
+                            </form>
+                        </div>
+                    <% } %>
+                    <!-- <a class="btn btn-primary" href="/chatrooms/<%=chatroom._id%>">View <%=chatroom.title%> Chatroom</a> -->
+            </div>
         </div>
-        <% } %>
+
     
         <div id="chatLog">
             <% for(let i=0; i < data.length; i++) {%>
@@ -71,7 +73,7 @@
     </div>
     
 </div>
-<link rel="stylesheet" type="text/css" href="/chatrooms/chatrooms.css">
+<link rel="stylesheet" type="text/css" href="/chatrooms/show.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.2/socket.io.js"
 integrity="sha512-YybopSVjZU0fe8TY4YDuQbP5bhwpGBE/T6eBUEZ0usM72IWBfWrgVI13qfX4V2A/W7Hdqnm7PIOYOwP9YHnICw=="
 crossorigin="anonymous"></script>

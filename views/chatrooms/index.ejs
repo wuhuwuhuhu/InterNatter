@@ -1,10 +1,8 @@
 <% layout('layouts/boilerplate')%>
 <div id="chatroomList" class="col-md-3">
     <h1>All Chatrooms</h1>
-    <div>
-        <a href="/chatrooms/new">Add Chatroom</a>
-    </div>
     <% for (let chatroom of chatrooms){%>
+    <div class="chatroomListItem">
         <a href="/chatrooms/<%=chatroom._id%>" class="custom-card" style="color: inherit;">
             <div class="card">
                 <div class="row">
@@ -21,6 +19,7 @@
                 </div>
             </div>
         </a>
+    </div>
     <% }%>
 </div>
 <link rel="stylesheet" type="text/css" href="/chatrooms/index.css">

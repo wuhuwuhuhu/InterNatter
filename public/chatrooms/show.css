@@ -1,5 +1,24 @@
+#chatroom {
+    background-color:azure;
+}
+
+#chatroomInfo{
+    background-color:aliceblue;
+}
+#chatroomInfo img{
+    
+    width: 100%;
+    border-radius: 30%;
+}
 #chatLog{
     margin-top: 30px;
+}
+#chatroom #chatroomInfo #chatroomInfoText{
+    text-align: left;
+    height: 100%;
+    font-size:larger;
+    padding-top: 20px;
+    font-weight: bold;
 }
 
 .card:hover{

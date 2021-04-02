@@ -1,4 +1,27 @@
 #chatroomList{
+    text-align: center;
     background-image: linear-gradient(to bottom right, #CAF2F1, #E0F6FB);
     height: 100%;
+}
+#chatroomList a{
+    text-decoration: none;
+
+
+}
+#chatroomList h1{
+    font-weight: bold;
+}
+
+#chatroomList .card{
+    border-radius: 30px;
+   
+}
+
+#chatroomList .card img{
+    width: 80%;
+   margin: 10%;
+   border-radius: 30%;
+}
+#chatroomList .chatroomListItem{
+    margin-top: 10px;
 }
