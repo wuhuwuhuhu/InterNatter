@@ -1,124 +1,191 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
-* { padding: 0; margin: 0; }
-html, body{
-    padding-top: 0px;
-    position: relative;
-    height: 100%;
-    size: 12px;
+* { 
+  padding: 0; 
+  margin: 0;
 }
 
+/* html, body {
+  padding-top: 0px;
+  position: relative;
+  height: 100%;
+  size: 12px;
+} */
 
 body {
   font-family: 'Montserrat', sans-serif;
+  background: rgb(174, 131, 190);
 }
 
-
-.hero h1{
-    text-align: left;
-    color: #CAF2F1;
-    font-size: 100px;
-    font-weight: bolder;
-    margin-top: 70px;
-    margin-left: 40px;
+.home h1{
+  color: #60118d;
+  font-size: 160px;
+  font-weight: bolder;
+  margin-top: 140px;
+  margin-left: 80px;
 }
 
-.hero p {
-  text-align: left;
-  color: #CAF2F1;
-  font-size: 30px;
+.home p {
+  color: #ffffff;
+  font-size: 40px;
   font-weight: lighter;
-  margin-top: 10px;
-  margin-left: 40px;
-}
-  
-.profile-info {
-    padding: 12px;
-    margin: 12px 0;
-    width: 100%;
-    outline: none;
-    font-size: 20px;
-    color: white;
-  }
-
-.profile {
-    width: 50%;
-    box-shadow: 0 0 30px 0 #057996;
-    background: #00000057;;
-    padding: 50px;
-    margin: 0 auto;
-    text-align: left; 
-}
-
-.profile h1 {
-  color: white;
-  font-weight: 700;
-  text-align: center;
-  padding-bottom: 40px;
-  text-transform: uppercase;
-}
-
-.nav-link {
-  color: white;
+  margin-top: 20px;
+  margin-left: 80px;
 }
 
 .login {
-    width: 30%;
-    box-shadow: 0 0 30px 0 #057996;
-    background: #00000057;;
-    padding: 50px;
-    margin: 0 auto;
-    text-align: left; 
+  width: 50%;
+  margin-top: 100px;;
+  margin-left: 100px;
 }
 
 .login h1 {
-  color: white;
-  font-weight: 700;
-  text-align: center;
-  padding-bottom: 40px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bolder;
+  font-size: 38px;
+  color: azure;
+  text-decoration: underline;
+  margin-bottom: 50px;
 }
 
 .login label {
-  color: white;
-  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+  color: azure;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.login input {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+  box-shadow: 0 0 10px 0 #380b80;
+  margin-bottom: 20px;
 }
 
 .login button {
-  background-color: #043527c9;
-  margin-top: 20px;
-  align-self: center;
-  border: none;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bolder;
+  margin-top: 40px;
+  width: 150px;
+  height: 50px;
+  background: rgb(66,39,90);
+  background: linear-gradient(0deg, rgba(66,39,90,1) 18%, rgba(115,75,109,1) 80%); 
+  border-color: black;
+  box-shadow: 0 0 10px 0 #380b80;
+}
+
+.login button:hover {
+  border-color: black;
 }
 
 .register {
-  box-shadow: 0 0 30px 0 #057996;
-  background: #00000057;;
-  padding: 30px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 500px;
+  width: 50%;
+  margin-top: 100px;;
+  margin-left: 100px;
 }
 
 .register h1 {
-color: white;
-font-size: 40px;
-font-weight: 700;
-text-align: center;
-padding-bottom: 40px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bolder;
+  font-size: 38px;
+  color: azure;
+  text-decoration: underline;
+  margin-bottom: 50px;
 }
 
 .register label {
-color: white;
-font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+  color: azure;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.register input {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+  box-shadow: 0 0 10px 0 #380b80;
+  margin-bottom: 20px;
 }
 
 .register button {
-background-color: #043527c9;
-margin-top: 20px;
-border: none;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bolder;
+  margin-top: 40px;
+  width: 150px;
+  height: 50px;
+  background: rgb(66,39,90);
+  background: linear-gradient(0deg, rgba(66,39,90,1) 18%, rgba(115,75,109,1) 80%); 
+  border-color: black;
+  box-shadow: 0 0 10px 0 #380b80;
 }
+
+.register button:hover {
+  border-color: black;
+}
+
+.profile {
+  width: 50%;
+  margin-top: 100px;;
+  margin-left: 100px;
+}
+
+.profile h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bolder;
+  font-size: 38px;
+  color: azure;
+  text-decoration: underline;
+  margin-bottom: 50px;
+}
+
+.profile-info {
+  font-family: 'Montserrat', sans-serif;
+  color: azure;
+  font-size: 22px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.profile label {
+  font-family: 'Montserrat', sans-serif;
+  color: azure;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.profile input {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+  box-shadow: 0 0 10px 0 #380b80;
+  margin-bottom: 20px;
+}
+
+.profile hr {
+  color: azure;
+  margin-top: 20px;
+  margin-bottom: 60px;
+  height: 5px;
+}
+
+.profile button {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bolder;
+  margin-top: 20px;
+  width: 150px;
+  height: 40px;
+  background: rgb(66,39,90);
+  background: linear-gradient(0deg, rgba(66,39,90,1) 18%, rgba(115,75,109,1) 80%); 
+  border-color: black;
+  box-shadow: 0 0 10px 0 #380b80;
+}
+
+.profile button:hover {
+  border-color: black;
+}
+
 .footer{
   position: relative;
   bottom: 0px;

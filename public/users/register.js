@@ -60,7 +60,7 @@ $(() => {
             if(responseMessage.code == 0){
                 alertMsg(true, "username", responseMessage.error);
             }else{
-                alertMsg(false, "username", `Good choice, ${value} hsa not been registered! as username.`);
+                alertMsg(false, "username", `Good choice, ${value} has not been registered as username.`);
             }
         });
         activeRegisterButton();
@@ -74,7 +74,7 @@ $(() => {
             if(responseMessage.code == 0){
                 alertMsg(true, "email", responseMessage.error);
             }else{
-                alertMsg(false, "email", `Good choice, ${value} hsa not been registered! as email.`);
+                alertMsg(false, "email", `Good choice, ${value} has not been registered as email.`);
                 return;
             }
         });

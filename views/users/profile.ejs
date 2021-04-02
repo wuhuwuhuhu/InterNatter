@@ -13,32 +13,31 @@
 
 <div class="profile">
 
-    <h1>Account Details</h1>  
+    <h1>PROFILE</h1>  
 
     <dl> 
-        
         <dt class="profile-info">Username: <%=user.username%></dt>
      
-
         <dt class="profile-info">Email: <%=user.email%></dt>
   
-
         <dt class="profile-info">Language: <%=user.language%></dt>
+
+        <hr>
         
         <dt class="profile-info">
             <form action="/profile" method="POST" class="validated-form" novalidate>
                 <div class="mb-3">
-                    <label class="form-label " for="friendlist">Add Friend:</label>
-                    <input class="form-control" type="text" id="friendlist" name="friendlist" required>
+                    <label class="form-label " for="friendlist">Search a Friend:</label>
+                    <input class="form-control" type="text" id="friendlist" name="friendlist"  placeholder="Name" required>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
                 </div>
-                
                 <button class="btn btn-success">Add</button>
             </form>
         </dt>
-            <dt class="profile-info">Friend  request</dt>
+
+        <dt class="profile-info">Friend Requests:</dt>
             <% for (var i in friend) { %>
                 <div class="card text-center">
                     <div class="card-body" friendlistId="<%= friend[i]._id %>" userId="<%= friend[i].userId %>" friendId="<%= friend[i].friendId %>" username="<%= friend[i].username %>" friendname ="<%= friend[i].friendname %>" >
