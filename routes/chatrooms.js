@@ -77,9 +77,10 @@ router.get('/:id', catchAsync(async (req, res) => {
       console.log(`port: ${port} was in use`);
     }
   });
+  const chatrooms = await Chatroom.find({});
 
 
-  res.render('chatrooms/show', { chatroom, data, username, userLanguage });
+  res.render('chatrooms/show', { chatrooms, chatroom, data, username, userLanguage });
 }));
 
 router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res) => {
