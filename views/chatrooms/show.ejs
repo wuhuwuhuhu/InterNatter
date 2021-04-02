@@ -21,25 +21,47 @@
             </div>
         </div>
 
-    
         <div id="chatLog">
             <% for(let i=0; i < data.length; i++) {%>
                 <% let chat=data[i]%>
                 <div class="card <%= username === chat.senderName? 'myMsg':''%>">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <%= chat.senderName %>
-                        </h5>
-                        <h6 class="card-subtitle mb-2 text-muted">
-                            <%= new Date(chat.sendTime).toLocaleString()%>
-                        </h6>
-                        <p class="card-text">
-                            Original: <%=chat.originalMsg%> (Language: <%= decodeURI(chat.originalLanguage)%>)
-                        </p>
-                        <p class="card-text">
-                            <%= chat.translatedMsg%>
-                        </p>
+                    <div class="row">
+                        <% if(username !== chat.senderName){%>
+                        <div class="col-md-2 sendInfo">
+                            <img class="img-fluid" alt="" src="/images/avatars/test_user.png" style="padding-top: auto 1px;">
+                            <h5 class="card-title">
+                                <%= chat.senderName %>
+                            </h5>
+                        </div>
+                        <%}%>
+                        
+                        <div class="col-md-10">
+                            <!-- <h5 class="card-title">
+                                <%= chat.senderName %>
+                            </h5> -->
+                            <div class="card-body">
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                    <%= new Date(chat.sendTime).toLocaleString()%>
+                                </h6>
+                                <p class="card-text">
+                                    Original: <%=chat.originalMsg%> (Language: <%= decodeURI(chat.originalLanguage)%>)
+                                </p>
+                                <p class="card-text">
+                                    <%= chat.translatedMsg%>
+                                </p>
+                            </div>
+
+                        </div>
+                        <% if(username === chat.senderName){%>
+                            <div class="col-md-2 sendInfo">
+                                <img class="img-fluid" alt="" src="/images/avatars/test_user.png" style="padding-top: auto 1px;">
+                                <h5 class="card-title">
+                                    <%= chat.senderName %>
+                                </h5>
+                            </div>
+                            <%}%>
                     </div>
+                    
                 </div>
             <% } %>
     
@@ -52,7 +74,7 @@
             <div id='emojis'>
                 <table class="">
                     <tbody>
-                        <% let emojis = ["😀","😃","😄","😁","😆","😅","😂","🤣","🥲","😊","😇","🙂","🙃","😉","😌","😍","🥰","😘","😗","😙","😚","😋","😛","😝","😜","🤪","🤨","🧐","🤓","😎","🥸","🤩","🥳","😏","😒","😞","😔","😟","😕","🙁","😣","😖","😫","😩","🥺","😢","😭","😤","😠","😡","🤬","🤯","😳","🥵","🥶","😱","😨","😰","😥","😓","🤗","🤔","🤭","🤫","🤥","😶","😐","😑","😬","🙄","😯","😦","😧","😮","😲","🥱","😴","🤤","😪","😵","🤐","🥴","🤢","🤮","🤧","😷","🤒","🤕","🤑","🤠","😈","👿","👹","👺","🤡","💩","👻","💀","☠️","👽","👾","🤖","🎃","😺","😸","😹","😻","😼","😽","🙀","😿","😾"] %>
+                        <% let emojis = ["😀","😃","😄","😁","😆","😅","😂","🤣","🥲","😊","😇","🙂","🙃","😉","😌","😍","🥰","😘","😗","😙","😚","😋","😛","😝","😜","🤪","🤨","🧐","🤓","😎","🥸","🤩","🥳","😏","😒","😞","😔","😟","😕","🙁","😣","😖","😫","😩","🥺","😢","😭","😤","😠","😡","🤬","🤯","😳","🥵","🥶","😱","😨","😰","😥","😓","🤗","🤔","🤭","🤫","🤥","😶","😐","😑","😬","🙄","😯","😦","😧","😮","😲","🥱","😴","🤤","😪","😵","🤐","🥴","🤢","🤮","🤧","😷","🤒","🤕","🤑","💩"] %>
                         <% for(let i=0; i < emojis.length; i++){ %>
                             <button class="emoji"><%= emojis[i] %></button>
                         <% }%>

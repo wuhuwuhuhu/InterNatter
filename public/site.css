@@ -119,3 +119,7 @@ background-color: #043527c9;
 margin-top: 20px;
 border: none;
 }
+.footer{
+  position: relative;
+  bottom: 0px;
+}

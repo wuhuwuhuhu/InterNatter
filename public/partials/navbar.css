@@ -1,6 +1,6 @@
 #navbar{
   background-image: linear-gradient(to bottom right, #F0FAF9, #D1F3F2);
-  position: relative;
+  position: fixed;
   height:100%;
   text-align: center;
   color: #92A7B7;

@@ -64,14 +64,59 @@ $(() => {
     })
 
     const receiveMsg = async chat => {
-        let newCard = `<div class="card ${username === chat.senderName ? 'myMsg' : ''}" >
-            <div class="card-body">
-                <h5 class="card-title">${chat.senderName}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">${new Date(chat.sendTime).toLocaleString()}</h6>
-                <p class="card-text">Original: ${chat.originalMsg} (Language: ${decodeURI(chat.originalLanguage)})</p>
-                <p class="card-text"> ${chat.translatedMsg} </p>
-            </div>
-        </div>`
+
+        let newCard;
+        if(username === chat.senderName){
+            newCard = `<div class="card myMsg">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="card-body">
+                                        <h6 class="card-subtitle mb-2 text-muted">
+                                            ${chat.sendTime.toLocaleString()}
+                                        </h6>
+                                        <p class="card-text">
+                                            Original: ${chat.originalMsg} (Language: ${ decodeURI(chat.originalLanguage)})
+                                        </p>
+                                        <p class="card-text">
+                                            ${chat.translatedMsg}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 sendInfo">
+                                    <img class="img-fluid" alt="" src="/images/avatars/test_user.png" style="padding-top: auto 1px;">
+                                    <h5 class="card-title">
+                                        ${chat.senderName}
+                                    </h5>
+                                </div>         
+                            </div>
+            
+                        </div>`
+        }else{
+            newCard = `<div class="card">
+                            <div class="row">
+                                <div class="col-md-2 sendInfo">
+                                    <img class="img-fluid" alt="" src="/images/avatars/test_user.png" style="padding-top: auto 1px;">
+                                    <h5 class="card-title">
+                                        ${chat.senderName}
+                                    </h5>
+                                </div> 
+                                <div class="col-md-10">
+                                    <div class="card-body">
+                                        <h6 class="card-subtitle mb-2 text-muted">
+                                            ${chat.sendTime.toLocaleString()}
+                                        </h6>
+                                        <p class="card-text">
+                                            Original: ${chat.originalMsg} (Language: ${ decodeURI(chat.originalLanguage)})
+                                        </p>
+                                        <p class="card-text">
+                                            ${chat.translatedMsg}
+                                        </p>
+                                    </div>
+                                </div>        
+                            </div>
+            
+                        </div>`
+        } 
         $('#chatLog').append(newCard);
     }
 
