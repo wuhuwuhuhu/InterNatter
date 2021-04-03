@@ -186,6 +186,11 @@ body {
   border-color: black;
 }
 
+#user img {
+  width: 30%;
+  border-radius:50%;
+}
+
 .footer{
   position: relative;
   bottom: 0px;
