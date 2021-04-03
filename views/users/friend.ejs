@@ -11,6 +11,11 @@
     <label class="form-label" for="language">Language: <%=user.language%></label>
 </div> -->
 
+
+
+
+
+<!--
 <div class="profile">
 
     <h1>Account Details</h1>  
@@ -33,7 +38,28 @@
                 <h3>friend</h3>
                 <h3> Name:<%= friends[n].friendname %></h3>
                 <h3>id:<%= friends[n].friendId %></h3>
-            <% } %>
-         
-       
+            <% } %>    
+</div> -->
+
+
+
+
+<link href="/partials/navbar.css" rel="stylesheet">
+
+<div class="col-md-2" id="navbar">
+  <!-- <div id="user">
+    <img class="img-circle" src="/images/avatars/test_user.png" alt="">
+    <p>Simo Edwin</p>
+    <p>www@q.com</p>
+  </div> -->
+  <h3>Friends</h3>
+  <ul class="nav flex-column">
+    <% for (var n in friends) { %>
+        <li class="nav-item">
+      <a class="nav-link active" href="/" ><i class="fa fa-fw fa-home"></i><%= friends[n].friendname %></a>
+    </li>
+    <% } %>  
+
+
+  </ul>
 </div>
