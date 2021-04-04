@@ -159,7 +159,7 @@ router.get('/friend',catchAsync(async (req, res) => {
     
         if(data2.length == 0) {
             console.log("No record found")
-            res.render('users/profile', {user: req.user,friend: data})
+            res.render('users/friend', {user: req.user,friends: data2})
             return
         }
         for(i = 0;i<data2.length;i++){
