@@ -2,6 +2,7 @@
     <%- include('./index')%>
 
     <div  class="col-md-9" id="chatroom">
+
         <div class="row" id="chatroomInfo">
             <div class="col-md-2">
                 <img class="img-fluid" alt="" src="<%=chatroom.image%>">
@@ -20,6 +21,8 @@
                     <!-- <a class="btn btn-primary" href="/chatrooms/<%=chatroom._id%>">View <%=chatroom.title%> Chatroom</a> -->
             </div>
         </div>
+
+        <hr>
 
         <div id="chatLog">
             <% for(let i=0; i < data.length; i++) {%>
@@ -66,11 +69,14 @@
             <% } %>
     
         </div>
+
         <hr>
+
         <div id="sendMsg">
-            <label for="sendMsgText">Send Message</label>
+            <p>Write your message:</p>
+            <!-- <label for="sendMsgText">Write a Message</label> -->
             <button id="buttonEmoji" type="button" class="btn btn-info">
-                <span>😂</span> emojis
+                <span>😂</span>  Use Emojis
             </button>
             <div id='emojis'>
                 <table class="">
@@ -81,7 +87,6 @@
                         <% }%>
                     </tbody>
                 </table>
-                
             </div>
     
             <textarea class="form-control" id="sendMsgText" rows="3" placeholder="Type here..."></textarea>
@@ -90,9 +95,9 @@
             <button type="button" class="btn btn-warning" id="clearMsgButton">Clear</button>
     
         </div>
+
         <ul id="messages"></ul>
         
-
     </div>
     
 </div>
