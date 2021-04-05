@@ -32,46 +32,55 @@ router.post('/register', catchAsync(async (req, res, next) => {
     }
 }));
 
+router.post('/users/search', catchAsync(async (req, res, next)=>{
+    const keyword = req.body.keyword;
+    let reg = new RegExp(`${keyword}`,"ig");
+    const results = await User.find({$or:[{"username": reg},{"email": reg}]},(err, doc)=>{
+    });
+    return res.json(results);
+}))
 
-router.post('/profile', catchAsync(async (req, res, next)=>{
+router.post('/users/addFriend', catchAsync(async (req, res, next)=>{
     
-
-    const user = await User 
-    
-
-    user.findById(req.body.friendlist, async function(err, result) {
-        if (err) {
-          console.log(req.body.friendlist +"Error: user doesnt exist");
-          res.redirect("profile")
-        } else {
-            var newfriend = await user.findById(req.body.friendlist)
-
-            if(newfriend !=null){
-
-                var friendlist = await friendList
-
-                var friendinlist  = await friendlist.exists({userId:req.user._id, friendId:newfriend._id})
-
-                if(friendinlist){
-                    console.log("user already in friendlist")
-                }
-                else{
-                        var friend = new friendList({userId:req.user._id, username: req.user.username,friendId:newfriend._id,friendname:newfriend.username })
+    const {userId, friendId} = req.body;
+    if(userId === friendId){
+        return res.json({status:1, msg:"Error: can not add your self."});
+    }
+    let user = await User.findById(userId);
+    let friend = await User.findById(friendId);
+    if(!user || !friend){
+        return res.json({status:1, msg:"Error: user doesnt exist"});
+    }
+    let friendinPendinglist  = await friendList.find({userId, friendId},(err, doc)=>{
+        console.log(err)
+    })
+    let friendinlist = await userFriends.find({userId, friendId});
+    if(friendinPendinglist.length != 0 || friendinlist.length != 0){
+        return res.json({status:1, msg:"User already in friendlist"});
+    }
+    let friendConnection = new friendList({userId, username: user.username, friendId,friendname: friend.username })
                             
-                        friend.save(function (err, friend) {
-                            if (err) return console.error(err);
-                            console.log(newfriend.username+" added to friendlist.");
-                        });
-                }
-                    
-            }
-             else{
-                console.log('error:invalid input')
-            }
-                
-            res.redirect("profile")     
+    friendConnection.save(function (err, friend) {
+        if (err) {
+            return res.json({status:1, msg:"Can not add"})
         }
-      });
+    });
+    return res.json({status:0, data: friendConnection});
+
+}))
+
+router.post('/users/getPendingList', catchAsync(async (req, res, next)=>{
+    
+    const {userId} = req.body;
+    let user = await User.findById(userId);
+    if(!user){
+        return res.json({status:1, msg:"Error: user doesn't exist"});
+    }
+    let friendinPendinglist  = await friendList.find({friendId: userId},(err, doc)=>{
+        console.log(err)
+    })
+    
+    return res.json({status:0, data: friendinPendinglist});
 
 }))
 
@@ -108,17 +117,17 @@ router.get('/profile',catchAsync(async (req, res) => {
 }));
 
 router.post('/users/friendRequestProcess', catchAsync(async (req, res, next)=>{
-    let {accept, friendListId, userId, friendId, username, friendname} = req.body;
+    let {accept, userId, friendId, username, friendname} = req.body;
 
     if(accept == "true"){
         var arr = [{userId: friendId,username:friendname, friendId: userId, friendname:username}, {userId: userId,username:username, friendId: friendId, friendname:friendname}]
-        userFriends.insertMany(arr,function (err, friend) {
+        await userFriends.insertMany(arr,function (err, friend) {
             if (err) return console.error(err);
             console.log(username +" is now your friend ");
           }); 
         
 
-          await friendList.deleteOne({"userId": userId,"friendId": friendId}, function(err, result){
+          await friendList.remove({$or:[{"userId": userId,"friendId": friendId}, {"userId": friendId,"friendId": userId}]}, function(err, result){
               if(err){
                   res.send(err)
               }
@@ -126,19 +135,19 @@ router.post('/users/friendRequestProcess', catchAsync(async (req, res, next)=>{
                   console.log(userId + ", " + friendId +" is deleated")
               }
           })
-          res.render('users/profile', {user: req.user, friend: data})
+          return res.send({code: 0})
     }
     if(accept == "false"){
         console.log(username + "did not accept your friend request ")
-        await friendList.deleteOne({"userId": userId,"friendId": friendId}, function(err, result){
+        await friendList.remove({$or:[{"userId": userId,"friendId": friendId}, {"userId": friendId,"friendId": userId}]}, function(err, result){
             if(err){
                 res.send(err)
             }
             else{
-                console.log(userId + " " + friendId + "done")
+                console.log(userId + ", " + friendId +" is deleated")
             }
         })
-        res.render('users/profile', {user: req.user, friend: data})
+        return res.send({code: 1})
     }
 
     

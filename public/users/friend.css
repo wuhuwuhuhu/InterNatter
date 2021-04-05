@@ -19,6 +19,11 @@
 
 #friendList .card {
     border-radius: 30px;
+    margin-top: 5px;
+}
+
+#friendList .card .card_title{
+    margin:0 auto ;
 }
 
 #friendList .card img {
@@ -157,4 +162,21 @@
 
 #clearMsgButton {
     color: white;
+}
+
+.custome_toggle_button{
+    width: 100%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder;
+    color: white;
+    margin: 5px;
+    background: rgb(66,39,90);
+    background: linear-gradient(0deg, rgba(66,39,90,1) 18%, rgba(115,75,109,1) 80%);
+    border-color: black;
+    box-shadow: 0 0 10px 0 #380b80;
+}
+.friend_request_accept, .friend_request_decline, .friend_add_request{
+    margin-left: 20%;
+    margin-right: 20%;
+    width: 60%;
 }

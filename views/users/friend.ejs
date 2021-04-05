@@ -2,6 +2,27 @@
   <% layout('layouts/boilerplate')%>
   <div id="friendList" class="col-md-3">
     <h1>Friends</h1>
+    <a class="btn custome_toggle_button dropdown-toggle" id="toggleAddFriendButton" href="/chatrooms/new">  &nbsp;&nbsp;Add Friend&nbsp;</a>
+    <div id="toggleAddFriend">
+      <div class="card">
+        <div class="card-body">
+          <form class="validated-form" novalidate>
+            <div class="mb-3">
+                <input class="form-control" type="text" id="searchUserInput" name="friendlist"  placeholder="Name or Email" required>
+            </div>
+            <button class="btn btn-success" id="searchUserButton">Search</button>
+        </form>
+        </div>
+      </div>
+      <div id="toggleAddFriendList">
+
+      </div>
+    </div>
+
+    <a class="btn custome_toggle_button dropdown-toggle" id="togglePendingListButton" href="/chatrooms/new">Pending List</a>
+    <div id="togglePendingList">
+
+    </div>
     <% for (let friend of friends){%>
     <div class="friendListItem" friendId="<%=friend.friendId%>" friendName="<%=friend.friendname%>">
       <a href="#" class="custom-card" style="color: inherit;">

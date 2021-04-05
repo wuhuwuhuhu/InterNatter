@@ -7,6 +7,11 @@ $(() => {
     const $friendChat = $('#friendChat')
     const $chatLog = $('#chatLog')
     const $currentChatFriend = $('#currentChatFriend');
+    const $toggleAddFriend = $('#toggleAddFriend');
+    const $togglePendingList = $('#togglePendingList');
+    const $toggleAddFriendList = $('#toggleAddFriendList')
+    const $searchUserButton = $('#searchUserButton')
+    
     let username = '';
     let userLanguage = '';
     let userId = '';
@@ -47,6 +52,8 @@ $(() => {
         }
         $sendMsgError.hide()
         $friendChat.hide()
+        $toggleAddFriend.hide();
+        $togglePendingList.hide();
         $sendMsgText.focus(function () {
             $sendMsgError.html("")
             $sendMsgError.hide()
@@ -221,5 +228,141 @@ $(() => {
         let value = event.target.innerHTML
         $sendMsgText.val($sendMsgText.val() + value); 
     })
+
+    //add friend
+    $('#toggleAddFriendButton').click((event) => {
+        event.preventDefault();
+        $toggleAddFriendList.empty();
+        $toggleAddFriend.slideToggle();
+    })
+    $searchUserButton.click(event => {
+        event.preventDefault();
+        $toggleAddFriendList.empty();
+        const keyword = $('#searchUserInput').val();
+        $.post("users/search", {keyword}, function (data) {
+            for(let i = 0; i < data.length; i++){
+                const user = data[i];
+                const $card = $(`        
+                <div class="card">
+                    <div class="row">
+                    <div class="col-md-4">
+                        <img class="img-fluid" alt="" src="${user.image?user.image:"/images/avatars/test_user.png"}" style="padding-top: auto 1px;">
+                    </div>
+                    <div class="col-md-8">
+                        <h5 class="card-title">${user.username}</h5>
+                        <span>${user.language}</span>
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="card-body">
+                        <span>${user.email}</span>
+                    </div>
+                    </div>
+                    <div class="row">
+                    <a href="#" newFriendId="${user._id}" class="btn btn-success btn-sm friend_add_request">Add</a>
+                    </div>
+              </div>
+              `)
+              $card.find(".friend_add_request").click(addNewFriend);
+              $toggleAddFriendList.append($card);
+            }
+        });
+    })
+    function addNewFriend(event) {
+        const data = {
+            userId,
+            friendId: $(event.target).attr("newfriendid")
+        }
+        const $target = $(event.target)
+        $.post("/users/addFriend", data, function (res) {
+            if(res.status === 1){
+                let $error = $(`
+                <div class="alert alert-warning" role="alert" style="width:80%; margin-left: 10%;
+                margin-top: 5px;">${res.msg}</div>
+                `)
+                $target.after($error)
+                
+                $target.text("Failed")
+                $target.removeClass("btn-success");
+                $target.addClass("btn-danger");
+            }else{
+                $target.text("Pending")
+            }
+            $target.addClass("disabled");
+        })        
+    }
+    //pending list
+    $('#togglePendingListButton').click((event) => {
+        event.preventDefault();
+        $togglePendingList.empty();
+        $.post("/users/getPendingList", {userId}, function (responseMessage) {
+            if(responseMessage.status === 0){
+                if(responseMessage.data.length === 0){
+                    $togglePendingList.append('<span>No Pending Request.</span>')
+                }else{
+                    const pendingList = responseMessage.data;
+                    for(let i = 0; i < pendingList.length; i++){
+                        const pendingUser = pendingList[i];
+                        const $card = $(`
+                        <div class="card">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img class="img-fluid" alt="" src="${pendingUser.image?user.image:"/images/avatars/test_user.png"}" style="padding-top: auto 1px;">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                    <h5 class="card-title">${pendingUser.username}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" pendingFriendId="${pendingUser.userId}" pendingFriendName="${pendingUser.username}">
+                                <a href="#" class="btn btn-success btn-sm friend_request_accept">Accept</a>
+                                <a href="#" class="btn btn-danger btn-sm friend_request_decline">Decline</a>
+                            </div>
+                      </div>
+                        `)
+                        $card.find('.friend_request_accept').click(processPendingRequest);
+                        $card.find('.friend_request_decline').click(processPendingRequest);
+                        $togglePendingList.append($card); 
+                    }
+                }
+            }
+        })
+        $togglePendingList.slideToggle();
+    })
+
+    function processPendingRequest(e) { 
+        e.preventDefault();
+        let accept = true;
+        if($(e.target).hasClass("friend_request_decline")){
+            accept = false;
+        }
+        let $target = $(e.target.parentNode);
+        let data = {
+            accept,
+            userId,
+            friendId: $target.attr("pendingFriendId"),
+            username,
+            friendname: $target.attr("pendingFriendName")
+
+        }
+        $.post("/users/friendRequestProcess", data, function (responseMessage) {
+            if(responseMessage.code === 0){
+                window.location.reload()
+                console.log(responseMessage)
+            }else{
+                //fail
+            }
+        });
+        if(accept){
+            $target.children('.friend_request_accept').text("Accepted");
+        }else{
+            $target.children('.friend_request_decline').text("Declined");
+        }
+        $target.children().addClass("disabled");
+        
+    }
+
+
 
 })
