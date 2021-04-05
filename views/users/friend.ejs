@@ -1,65 +1,66 @@
-        <% layout('layouts/boilerplate')%>
-<!-- <h1>Profile</h1> -->
+<div class="row" style="height: 100%;">
+  <% layout('layouts/boilerplate')%>
+  <div id="friendList" class="col-md-3">
+    <h1>Friends</h1>
+    <% for (let friend of friends){%>
+    <div class="friendListItem" friendId="<%=friend.friendId%>" friendName="<%=friend.friendname%>">
+      <a href="#" class="custom-card" style="color: inherit;">
+        <div class="card">
+          <div class="row">
+            <div class="col-md-4">
+              <img class="img-fluid" alt="" src="/images/avatars/test_user.png" style="padding-top: auto 1px;">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title"><%= friend.friendname %> </h5>
+                <span class="badge bg-info ms-2"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <% }%>
+  </div>
+  <div class="col-md-9" id="friendChat">
+    <div class="row" id="chatroomInfo">
+      <h4 id="currentChatFriend"></h4>
+    </div>
 
-<!-- <div class="mb-3">
-    <label class="form-label" for="username">Username: <%=user.username%></label>
+    <div id="chatLog">
+
+    </div>
+    <div id="sendMsg">
+      <label for="sendMsgText">Send Message</label>
+      <button id="buttonEmoji" type="button" class="btn btn-info">
+        <span>😂</span> emojis
+      </button>
+      <div id='emojis'>
+        <table class="">
+          <tbody>
+            <% let emojis = ["😀","😃","😄","😁","😆","😅","😂","🤣","🥲","😊","😇","🙂","🙃","😉","😌","😍","🥰","😘","😗","😙","😚","😋","😛","😝","😜","🤪","🤨","🧐","🤓","😎","🥸","🤩","🥳","😏","😒","😞","😔","😟","😕","🙁","😣","😖","😫","😩","🥺","😢","😭","😤","😠","😡","🤬","🤯","😳","🥵","🥶","😱","😨","😰","😥","😓","🤗","🤔","🤭","🤫","🤥","😶","😐","😑","😬","🙄","😯","😦","😧","😮","😲","🥱","😴","🤤","😪","😵","🤐","🥴","🤢","🤮","🤧","😷","🤒","🤕","🤑","💩"] %>
+            <% for(let i=0; i < emojis.length; i++){ %>
+            <button class="emoji"><%= emojis[i] %></button>
+            <% }%>
+          </tbody>
+        </table>
+
+      </div>
+
+      <textarea class="form-control" id="sendMsgText" rows="3" placeholder="Type here..."></textarea>
+      <p class="alert alert-danger" role="alert" id="sendMsgError"></p>
+      <button type="button" class="btn btn-success" id="sendMsgButton">Send</button>
+      <button type="button" class="btn btn-warning" id="clearMsgButton">Clear</button>
+
+    </div>
+    <ul id="messages"></ul>
+
+
+  </div>
+
 </div>
-<div class="mb-3">
-    <label class="form-label" for="email">Email: <%=user.email%></label>
-</div>
-<div class="mb-3">
-    <label class="form-label" for="language">Language: <%=user.language%></label>
-</div> -->
-
-
-
-
-
-<!--
-<div class="profile">
-
-    <h1>Account Details</h1>  
-
-    <dl> 
-        
-        <dt class="profile-info">Username: <%=user.username%></dt>
-     
-
-        <dt class="profile-info">Email: <%=user.email%></dt>
-  
-
-        <dt class="profile-info">Language: <%=user.language%></dt>
-        
-        <dt class="profile-info">
-        </dt>
-            <<dt class="profile-info">Friends</dt>
-        
-            <% for (var n in friends) { %>
-                <h3>friend</h3>
-                <h3> Name:<%= friends[n].friendname %></h3>
-                <h3>id:<%= friends[n].friendId %></h3>
-            <% } %>    
-</div> -->
-
-
-
-
-<link href="/partials/navbar.css" rel="stylesheet">
-
-<div class="col-md-2" id="navbar">
-  <!-- <div id="user">
-    <img class="img-circle" src="/images/avatars/test_user.png" alt="">
-    <p>Simo Edwin</p>
-    <p>www@q.com</p>
-  </div> -->
-  <h3>Friends</h3>
-  <ul class="nav flex-column">
-    <% for (var n in friends) { %>
-        <li class="nav-item">
-      <a class="nav-link active" href="/" ><i class="fa fa-fw fa-home"></i><%= friends[n].friendname %></a>
-    </li>
-    <% } %>  
-
-
-  </ul>
-</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.2/socket.io.js"
+  integrity="sha512-YybopSVjZU0fe8TY4YDuQbP5bhwpGBE/T6eBUEZ0usM72IWBfWrgVI13qfX4V2A/W7Hdqnm7PIOYOwP9YHnICw=="
+  crossorigin="anonymous"></script>
+<script src="/users/friend.js"></script>
+<link rel="stylesheet" type="text/css" href="/users/friend.css">

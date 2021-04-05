@@ -6,6 +6,8 @@ const User = require('../models/user');
 const friendList = require('../models/friendlist')
 const langs = require('../utils/translate/languages')
 const userFriends =  require('../models/friend')
+const detect = require('detect-port');
+const Message = require('../models/message');
 
 router.get('/register', (req, res) => {
     res.render('users/register', {langs});
@@ -108,8 +110,6 @@ router.get('/profile',catchAsync(async (req, res) => {
 router.post('/users/friendRequestProcess', catchAsync(async (req, res, next)=>{
     let {accept, friendListId, userId, friendId, username, friendname} = req.body;
 
-    
-    
     if(accept == "true"){
         var arr = [{userId: friendId,username:friendname, friendId: userId, friendname:username}, {userId: userId,username:username, friendId: friendId, friendname:friendname}]
         userFriends.insertMany(arr,function (err, friend) {
@@ -147,7 +147,11 @@ router.post('/users/friendRequestProcess', catchAsync(async (req, res, next)=>{
     */
     console.log("get friendRequestProcess request", req.body);
 }));
-
+router.post('/users/getPrivateMessages', catchAsync(async (req, res, next)=>{
+    let {userId, friendId} = req.body;
+    let response = await Message.getPrivateChatLog({userId, friendId});
+    return res.json(response);
+}));
 router.get('/friend',catchAsync(async (req, res) => {
     const userfriend = await userFriends
 
@@ -163,9 +167,28 @@ router.get('/friend',catchAsync(async (req, res) => {
             return
         }
         for(i = 0;i<data2.length;i++){
-        console.log(data2[i].username);
-        console.log(data2[i].userId)
+        // console.log(data2[i].username);
+        // console.log(data2[i].userId)
     }
+      // check if the server is on
+  const port = 4000;
+  detect(port, (err, _port) => {
+    if (err) {
+      console.log(err);
+    }
+  
+    if (port == _port) {
+      const app = express();
+      const server = require('http').createServer(app);
+      require('../server/socketIO_server')(req.user, server);
+      server.listen(4000, () => {
+        console.log("Serving on port 4000");
+      })
+      // console.log(`port: ${port} was not occupied`);
+    } else {
+      console.log(`port: ${port} was in use`);
+    }
+  });
     res.render('users/friend', {user: req.user,  friends: data2})
         
     })

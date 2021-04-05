@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+
+#friendChatList {
+    text-align: center;
+    background-image: linear-gradient(to bottom right, #CAF2F1, #E0F6FB);
+    height: 100%;
+}
+
+#friendChatList a {
+    text-decoration: none;
+}
+
+#friendChatList h1 {
+    font-weight: bold;
+}
+
+#friendChatList .card {
+    border-radius: 30px;
+}
+
+#friendChatList .card img {
+    width: 80%;
+    margin: 10%;
+    border-radius: 30%;
+}
+
+#friendChatList .friendChatListItem {
+    margin-top: 10px;
+}
+
+#friendChat {
+    background-color:azure;
+    /* position: fixed; */
+    /* padding-left: 50%; */
+    /* margin-left: 25%; */
+    padding-right: 100px;
+    /* height: 100%; */
+}
+
+#friendChatInfo{
+    background-color:aliceblue;
+}
+#friendChatInfo img{
+    
+    width: 100%;
+    border-radius: 30%;
+}
+#chatLog{
+    margin-top: 10px;
+}
+#chatLog img{
+    /* width: 40%; */
+    padding-top: 10%;
+    border-radius: 50%;
+    min-width: 50px;
+
+}
+
+#chatLog .card{
+    background: none;
+    border: 0px;
+    /* width: 70%; */
+    padding-top: 30px;
+}
+
+#chatlog .card .col-md-10{
+    background:none;
+}
+#chatLog .card .card-body{
+    background-color: white;
+    border-radius: 30px;
+    /* width: auto;
+    min-width: 40%;
+    max-width: 60%; */
+    padding: 30px;
+    display: inline-block;
+    max-width: 80%;
+}
+#chatLog .card .sendInfo{
+    text-align: center;
+}
+#friendChat #friendChatInfo #friendChatInfoText{
+    text-align: left;
+    height: 100%;
+    font-size:larger;
+    padding-top: 20px;
+    font-weight: bold;
+}
+#chatLog .myMsg .card-body {
+    
+    background-color:#4546A2;
+    color: white;
+}
+/* .myMsg{
+    padding-right: 0px;
+} */
+
+.card:hover{
+    transform: scale(1.02);
+    box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
+.myMsg{
+    text-align: right;
+}
+
+#sendMsg{
+    margin-top: 30px;
+    letter-spacing: 0.1em;
+    margin-bottom: 60px;
+}
+#emojis{
+    width: 70%;
+}
+#emojis>button{
+    background-color: #f0f8ff;
+    font-size: 1.6em;
+    border: 0px ;
+}

@@ -76,6 +76,44 @@ MessageSchema.statics.getChatroomLog = async function (chatroomId, language){
     
 }
 
+MessageSchema.statics.getPrivateChatLog = async function ({userId, friendId}){
+    const user = await mongoose.model('User').findById(userId);
+    const friend = await mongoose.model('User').findById(friendId);
+    const chatLog = await mongoose.model('Message').find(
+        {$or:[{receiver: userId, sender: friendId},{receiver: friendId, sender:userId}]}
+        );
+    let language = user.language;
+    if(!language){
+        language = "English"
+    }
+    let r = []
+    for(let i = 0; i < chatLog.length; i++){
+        let chat = chatLog[i];
+        let translatedMsg = chat.versions.get(language)
+        if(!translatedMsg){
+            let response = await translator({text: chat.content, from: chat.originalLanguage, to: language})
+            translatedMsg = response.text;
+            chat.versions.set(language, translatedMsg)
+            chat.save()
+        }
+        let senderName = chat.senderName;
+        if(!senderName && chat.sender){
+            let senderUser = await mongoose.model('User').findById(msg.sender);
+            senderName = senderUser.username
+        }
+         
+        r.push({
+            senderName: senderName,
+            originalLanguage: chat.originalLanguage,
+            originalMsg: chat.content,
+            translatedMsg: translatedMsg,
+            sendTime: chat.sendTime
+        })
+    }
+    return r
+    
+}
+
 var MessageModule = mongoose.model('Message', MessageSchema);
 
 

@@ -8,6 +8,8 @@ module.exports = function (user, server) {
       methods: ["GET", "POST"]
     }
   });
+  const onlineUsers = {};
+  const onlineUsersSessions = io.sockets.sockets;
   io.on('connection', function (socket) {
     socket.on('join', roomId => {
       socket.join(roomId);
@@ -29,9 +31,46 @@ module.exports = function (user, server) {
       })
     })
 
+    socket.on('online', ({userId, sessionID}) => {
+      console.log(sessionID);
+      onlineUsers[userId] = sessionID;
+      //a new user requested the friend page
+      socket.on("sendPrivateMsg", async ({ msg, senderId, receiverId, senderName, senderLang }) => {
+        const data = {
+          receiver: receiverId,
+          senderName: senderName,
+          content: msg,
+          originalLanguage: senderLang     
+        }
+        if(senderId){
+          data.sender = senderId
+        }
+        let msgId = await Message.createNew(data);
+        io.to(sessionID).emit('receivePrivateMsg', { 
+          messageId: msgId.id,
+          senderName: senderName,
+          senderId: senderId
+        })
+        // console.log(onlineUsers[receiverId]);
+        // console.log(onlineUsersSessions.get(onlineUsers[receiverId]))
+        if(onlineUsers[receiverId] && onlineUsersSessions.get(onlineUsers[receiverId])){
+          console.log(receiverId, "online")
+          let reveiverSessionId = onlineUsers[receiverId];
+          io.to(reveiverSessionId).emit('receivePrivateMsg', { 
+            messageId: msgId.id,
+            senderName: senderName,
+            senderId: senderId
+          })
+        }
+        else{
+          console.log(receiverId, "offline")
+        }
+      })
+    })
 
 
-    console.log('a user connected')
+
+    // console.log('a user connected')
 
   })
 }
