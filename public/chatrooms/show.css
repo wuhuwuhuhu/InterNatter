@@ -112,13 +112,14 @@
 }
 
 #emojis {
-    width: 70%;
+    width: 90%;
 }
 
 #emojis>button {
     background-color: #f0f8ff;
     font-size: 1.6em;
     border: 0px ;
+    width: 2em;
 }
 
 #clearMsgButton {

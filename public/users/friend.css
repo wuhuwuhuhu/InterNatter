@@ -1,36 +1,38 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 
-#friendChatList {
+#friendList {
     text-align: center;
+    font-family: 'Montserrat', sans-serif;
     background-image: linear-gradient(to bottom right, #CAF2F1, #E0F6FB);
     height: 100%;
+    background: rgb(174, 131, 190);
 }
 
-#friendChatList a {
+#friendList a {
     text-decoration: none;
 }
 
-#friendChatList h1 {
+#friendList h1 {
     font-weight: bold;
 }
 
-#friendChatList .card {
+#friendList .card {
     border-radius: 30px;
 }
 
-#friendChatList .card img {
+#friendList .card img {
     width: 80%;
     margin: 10%;
     border-radius: 30%;
 }
 
-#friendChatList .friendChatListItem {
+#friendList .friendListItem {
     margin-top: 10px;
 }
 
 #friendChat {
-    background-color:azure;
+    background: rgb(209, 176, 221);
     /* position: fixed; */
     /* padding-left: 50%; */
     /* margin-left: 25%; */
@@ -38,36 +40,39 @@
     /* height: 100%; */
 }
 
-#friendChatInfo{
-    background-color:aliceblue;
+#friendChatInfo {
+    background: rgb(209, 176, 221);
+    color: white;
 }
-#friendChatInfo img{
-    
+
+#friendChatInfo img {
     width: 100%;
     border-radius: 30%;
 }
-#chatLog{
+
+#chatLog {
     margin-top: 10px;
 }
-#chatLog img{
+
+#chatLog img {
     /* width: 40%; */
     padding-top: 10%;
     border-radius: 50%;
     min-width: 50px;
-
 }
 
-#chatLog .card{
+#chatLog .card {
     background: none;
     border: 0px;
     /* width: 70%; */
     padding-top: 30px;
 }
 
-#chatlog .card .col-md-10{
+#chatlog .card .col-md-10 {
     background:none;
 }
-#chatLog .card .card-body{
+
+#chatLog .card .card-body {
     background-color: white;
     border-radius: 30px;
     /* width: auto;
@@ -77,9 +82,11 @@
     display: inline-block;
     max-width: 80%;
 }
-#chatLog .card .sendInfo{
+
+#chatLog .card .sendInfo {
     text-align: center;
 }
+
 #friendChat #friendChatInfo #friendChatInfoText{
     text-align: left;
     height: 100%;
@@ -87,34 +94,67 @@
     padding-top: 20px;
     font-weight: bold;
 }
+
 #chatLog .myMsg .card-body {
-    
     background-color:#4546A2;
     color: white;
 }
+
 /* .myMsg{
     padding-right: 0px;
 } */
 
-.card:hover{
+.card:hover {
     transform: scale(1.02);
-    box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+    /* box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06); */
+    box-shadow: black;
+    box-shadow: 0 0 30px 0 #60118d;
 }
 
-.myMsg{
+.myMsg {
     text-align: right;
 }
 
-#sendMsg{
+#sendMsg {
     margin-top: 30px;
     letter-spacing: 0.1em;
     margin-bottom: 60px;
+    color: rgb(125, 21, 185);
 }
-#emojis{
-    width: 70%;
+
+#sendMsg textarea {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 150px;
 }
-#emojis>button{
+#sendMsg p {
+   font-size: 22px;
+   font-weight: bolder;
+}
+
+#sendMsg button {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bolder;
+  margin-top: 20px;
+  width: 180px;
+  height: 50px;
+  background: rgb(66,39,90);
+  background: linear-gradient(0deg, rgba(66,39,90,1) 18%, rgba(115,75,109,1) 80%); 
+  border-color: black;
+  box-shadow: 0 0 10px 0 #380b80;
+}
+
+#emojis {
+    width: 90%;
+}
+
+#emojis>button {
     background-color: #f0f8ff;
     font-size: 1.6em;
     border: 0px ;
+    width: 2em;
+}
+
+#clearMsgButton {
+    color: white;
 }
