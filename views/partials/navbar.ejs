@@ -16,9 +16,9 @@
     <li class="nav-item">
       <a class="nav-link active" href="/chatrooms"><i class="fa fa-fw fa-folder"></i>Chatrooms</a>
     </li>
-    <li class="nav-item">
+    <!-- <li class="nav-item">
       <a class="nav-link active" href="/chatrooms/new"><i class="fa fa-fw fa-file-o"></i>New Chatroom</a>
-    </li class="nav-item">
+    </li class="nav-item"> -->
     <% if(!currentUser) {%>
     <li class="nav-item">
       <a class="nav-link active" href="/login"><i class="fa fa-fw fa-bank"></i> Login</a>
@@ -28,10 +28,10 @@
     </li>
     <% } else {%>
     <li class="nav-item">
-      <a class="nav-link active" href="/profile"><i class="fa fa-fw fa-twitter"></i> Profile</a>
+      <a class="nav-link active" href="/friend"><i class="fa fa-fw fa-twitter"></i> Friends</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active" href="/friend"><i class="fa fa-fw fa-twitter"></i> Friends</a>
+      <a class="nav-link active" href="/profile"><i class="fa fa-fw fa-twitter"></i> Profile</a>
     </li>
     <li class="nav-item">
       <a class="nav-link active" href="/logout"><i class="fa fa-fw fa-twitter"></i> Logout</a>
