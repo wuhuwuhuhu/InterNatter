@@ -32,43 +32,50 @@ const main = async () => {
           "sender": "test",
           "originalMsg": "I am the best tester",
           "send_time": 1614905034820,
-          "senderLang": "English"
+          "senderLang": "English",
+          "image": "https://pinprestige.com/wp-content/uploads/2021/01/%E5%AD%AB%E7%87%95%E5%A7%BF_%E9%A4%98%E9%A1%8D_%E5%96%AE%E6%9B%B2%E5%B0%81%E9%9D%A2_%E7%B9%81-scaled.jpg"
         },
         {
           "sender": "Jerry",
           "originalMsg": "Hello.",
           "send_time": 1614907034604,
-          "senderLang": "English"
+          "senderLang": "English",
+          "image": "https://tinyfac.es/data/avatars/A7299C8E-CEFC-47D9-939A-3C8CA0EA4D13-500w.jpeg"
         },
         {
           "sender": "zhao",
           "originalMsg": "Nice to meet you.",
           "send_time": 1614907035620,
-          "senderLang": "English"
+          "senderLang": "English",
+          "image": "https://tinyfac.es/data/avatars/B3CF5288-34B0-4A5E-9877-5965522529D6-500w.jpeg"
         },
         {
           "sender": "John",
           "originalMsg": "Hello.",
           "send_time": 1614907044604,
-          "senderLang": "English"
+          "senderLang": "English",
+          "image": "https://tinyfac.es/data/avatars/282A12CA-E0D7-4011-8BDD-1FAFAAB035F7-500w.jpeg"
         },
         {
           "sender": "Mike",
           "originalMsg": "Nice to meet you.",
           "send_time": 1614907134620,
-          "senderLang": "English"
+          "senderLang": "English",
+          "image": "https://tinyfac.es/data/avatars/BA0CB1F2-8C79-4376-B13B-DD5FB8772537-500w.jpeg"
         },
         {
           "sender": "Nicole",
           "originalMsg": "Bonjour je suis francais",
           "send_time": 1614907234604,
-          "senderLang": "French"
+          "senderLang": "French",
+          "image": "https://tinyfac.es/data/avatars/03F55412-DE8A-4F83-AAA6-D67EE5CE48DA-500w.jpeg"
         },
         {
           "sender": "whd",
           "originalMsg": "很高兴见到你",
           "send_time": 1614905034620,
-          "senderLang": "Chinese (Simplified)"
+          "senderLang": "Chinese (Simplified)",
+          "image": "https://tinyfac.es/data/avatars/1C4EEDC2-FE9C-40B3-A2C9-A038873EE692-500w.jpeg"
         }
       ]
     let testUser = null; // this variable is used to add one creator to the chatroom.
@@ -76,7 +83,7 @@ const main = async () => {
     console.log('Done seeding database');
     for(var i = 0; i < data.length; i++) {
         let msg = data[i]
-        let user = new User({ email: msg.sender + "@gmail.com", username: msg.sender, language: msg.senderLang });
+        let user = new User({ email: msg.sender + "@gmail.com", username: msg.sender, language: msg.senderLang, image: msg.image});
         if(!testUser){
           chatroom.creator = user.id;
           await chatroom.save();
