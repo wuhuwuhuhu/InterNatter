@@ -8,15 +8,19 @@ const langs = require('../utils/translate/languages')
 const userFriends =  require('../models/friend')
 const detect = require('detect-port');
 const Message = require('../models/message');
+const multer = require('multer');
+const { storage } = require('../cloudinary');
+const upload = multer({ storage });
 
 router.get('/register', (req, res) => {
     res.render('users/register', {langs});
 });
 
-router.post('/register', catchAsync(async (req, res, next) => {
+router.post('/register', upload.array('image'), catchAsync(async (req, res, next) => {
     try {
         const { email, username, password, language } = req.body;
         const user = new User({ email, username, language });
+        user.image = req.files[0].path;
         const registeredUser = await User.register(user, password);
         req.login(registeredUser, err => {
             if (err) return next(err);
@@ -89,7 +93,6 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/profile',catchAsync(async (req, res) => {
-
     const friendlist = await friendList
 
     friendlist.find({friendId:req.user._id}, function(err, data){
@@ -107,6 +110,7 @@ router.get('/profile',catchAsync(async (req, res) => {
         console.log(data[i].username);
         console.log(data[i].userId)
     }
+    
     res.render('users/profile', {user: req.user,  friend: data})
     })    
     //const friendrequest = friendlist.find({friendId:req.user._id })

@@ -80,7 +80,7 @@ router.get('/:id', catchAsync(async (req, res) => {
   const chatrooms = await Chatroom.find({});
 
 
-  res.render('chatrooms/show', { chatrooms, chatroom, data, username, userLanguage });
+  res.render('chatrooms/show', { chatrooms, chatroom, data, username, userLanguage, user: req.user });
 }));
 
 router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res) => {

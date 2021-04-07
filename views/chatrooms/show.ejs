@@ -31,7 +31,7 @@
                     <div class="row">
                         <% if(username !== chat.senderName){%>
                         <div class="col-md-2 sendInfo">
-                            <img class="img-fluid" alt="" src="/images/avatars/test_user.png" style="padding-top: auto 1px;">
+                            <img class="img-fluid" alt="" src= <%= chat.portrait? chat.portrait: "/images/avatars/default_avatar.png" %> style="padding-top: auto 1px;">
                             <h5 class="card-title">
                                 <%= chat.senderName %>
                             </h5>
@@ -57,7 +57,7 @@
                         </div>
                         <% if(username === chat.senderName){%>
                             <div class="col-md-2 sendInfo">
-                                <img class="img-fluid" alt="" src="/images/avatars/test_user.png" style="padding-top: auto 1px;">
+                                <img class="img-fluid" alt="" src= <%= user.image? user.image: "/images/avatars/default_avatar.png" %> style="padding-top: auto 1px;">
                                 <h5 class="card-title">
                                     <%= chat.senderName %>
                                 </h5>

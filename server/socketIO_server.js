@@ -1,4 +1,5 @@
-const Message = User = require('../models/message');
+const Message = require('../models/message');
+const User = require('../models/user');
 
 module.exports = function (user, server) {
   const io = require('socket.io')(server, {
@@ -21,7 +22,9 @@ module.exports = function (user, server) {
           originalLanguage: senderLang     
         }
         if(senderId){
-          data.sender = senderId
+          data.sender = senderId;
+          const user = await User.findById(senderId);
+          data.portrait = user.image;
         }
         let msgId = await Message.createNew(data);
         io.to(roomId).emit('receiveMsg', { 

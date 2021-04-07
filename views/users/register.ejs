@@ -62,7 +62,7 @@
 
     <h1>Register</h1>
 
-    <form action="/register" method="POST"  class="validated-form" id="registerForm" novalidate>
+    <form action="/register" method="POST"  class="validated-form" id="registerForm" novalidate enctype="multipart/form-data">
         
     <div class="mb-3">
         <label class="form-label" for="username">Username</label>
@@ -101,6 +101,16 @@
         <p class="alert alert-danger" role="alert" id="password2Alert"></p>
         <div class="valid-feedback">
             Looks good!
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <div class="form-file custom-file">
+            <input type="file" class="form-file-input" id="image" name="image">
+            <label class="form-file-label" for="image">
+                <span class="form-file-text custom-file-label">Choose a profile image</span>
+                <span class="form-file-button">Browse</span>
+            </label>
         </div>
     </div>
 

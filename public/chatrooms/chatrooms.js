@@ -12,19 +12,19 @@ $(() => {
     for deployment at ECS:
     const socket = io('http://104.194.73.106:4000')
     */
-    socket.on('connect', function() {
+    socket.on('connect', function () {
         const sessionID = socket.id;
-        if(!username){
-            username = "Anonymous_User_" + sessionID.slice(0,8);
+        if (!username) {
+            username = "Anonymous_User_" + sessionID.slice(0, 8);
         }
     })
     socket.emit("join", roomId)
-    socket.on('receiveMsg', ({messageId, senderName}) => {
-    $.get("/chatrooms/getMessage", {messageId, senderName, userLanguage}, function (responseMessage) {
-            receiveMsg(responseMessage) 
+    socket.on('receiveMsg', ({ messageId, senderName }) => {
+        $.get("/chatrooms/getMessage", { messageId, senderName, userLanguage }, function (responseMessage) {
+            receiveMsg(responseMessage)
         });
     })
-    
+
 
     const cookies = document.cookie.split(';')
     //Set default language and user name to prevent bad data
@@ -37,7 +37,7 @@ $(() => {
         if (pair[0].trim() === 'userLanguage') userLanguage = decodeURI(pair[1]);
         if (pair[0].trim() === 'userId') userId = decodeURI(pair[1]).match(/[0-9a-fA-F]{24}/)[0];
     }
-    if(!userLanguage){
+    if (!userLanguage) {
         userLanguage = "English";
     }
     $sendMsgError.hide()
@@ -54,8 +54,8 @@ $(() => {
             $sendMsgError.html("Please write something before send.")
             return;
         }
-        
-        socket.emit('sendMsg', { msg, senderId: userId, senderName: username, senderLang: userLanguage})
+
+        socket.emit('sendMsg', { msg, senderId: userId, senderName: username, senderLang: userLanguage })
         $sendMsgText.val("")
     })
 
@@ -66,7 +66,7 @@ $(() => {
     const receiveMsg = async chat => {
 
         let newCard;
-        if(username === chat.senderName){
+        if (username === chat.senderName) {
             newCard = `<div class="card myMsg">
                             <div class="row">
                                 <div class="col-md-10">
@@ -75,7 +75,7 @@ $(() => {
                                             ${chat.sendTime.toLocaleString()}
                                         </h6>
                                         <p class="card-text">
-                                            Original: ${chat.originalMsg} (Language: ${ decodeURI(chat.originalLanguage)})
+                                            Original: ${chat.originalMsg} (Language: ${decodeURI(chat.originalLanguage)})
                                         </p>
                                         <p class="card-text">
                                             ${chat.translatedMsg}
@@ -83,7 +83,7 @@ $(() => {
                                     </div>
                                 </div>
                                 <div class="col-md-2 sendInfo">
-                                    <img class="img-fluid" alt="" src="/images/avatars/test_user.png" style="padding-top: auto 1px;">
+                                    <img class="img-fluid" alt="" src=${chat.portrait? chat.portrait: "../images/avatars/default_avatar.png"} style="padding-top: auto 1px;">
                                     <h5 class="card-title">
                                         ${chat.senderName}
                                     </h5>
@@ -91,11 +91,11 @@ $(() => {
                             </div>
             
                         </div>`
-        }else{
+        } else {
             newCard = `<div class="card">
                             <div class="row">
                                 <div class="col-md-2 sendInfo">
-                                    <img class="img-fluid" alt="" src="/images/avatars/test_user.png" style="padding-top: auto 1px;">
+                                    <img class="img-fluid" alt="" src=${chat.portrait? chat.portrait: "../images/avatars/default_avatar.png"} style="padding-top: auto 1px;">
                                     <h5 class="card-title">
                                         ${chat.senderName}
                                     </h5>
@@ -106,7 +106,7 @@ $(() => {
                                             ${chat.sendTime.toLocaleString()}
                                         </h6>
                                         <p class="card-text">
-                                            Original: ${chat.originalMsg} (Language: ${ decodeURI(chat.originalLanguage)})
+                                            Original: ${chat.originalMsg} (Language: ${decodeURI(chat.originalLanguage)})
                                         </p>
                                         <p class="card-text">
                                             ${chat.translatedMsg}
@@ -116,7 +116,7 @@ $(() => {
                             </div>
             
                         </div>`
-        } 
+        }
         $('#chatLog').append(newCard);
     }
 
@@ -129,7 +129,7 @@ $(() => {
 
     $emojis.click((event) => {
         let value = event.target.innerHTML
-        $sendMsgText.val($sendMsgText.val() + value); 
+        $sendMsgText.val($sendMsgText.val() + value);
     })
 
 })

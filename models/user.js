@@ -12,7 +12,9 @@ const UserSchema = new Schema({
     language: {
         type: String,
         required: true
-    }
+    },
+
+    image: String
 });
 
 UserSchema.plugin(passportLocalMongoose);

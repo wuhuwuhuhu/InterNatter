@@ -10,7 +10,8 @@ let MessageSchema = new Schema({
     originalLanguage: {type: String, default: "English"},
     sendTime: {type: Date, default: new Date()},
     deleted:{type: Boolean, default: false},
-    versions:{type: Map, of: String}
+    versions:{type: Map, of: String},
+    portrait: {type: String}
 });
 
 MessageSchema.statics.createNew = async function (data){
@@ -40,7 +41,8 @@ MessageSchema.statics.getMessage = async function (msgId, senderName, language){
         originalLanguage: msg.originalLanguage,
         originalMsg: msg.content,
         translatedMsg: translatedMsg,
-        sendTime: msg.sendTime
+        sendTime: msg.sendTime,
+        portrait: msg.portrait
     }
 }
 MessageSchema.statics.getChatroomLog = async function (chatroomId, language){
@@ -69,7 +71,8 @@ MessageSchema.statics.getChatroomLog = async function (chatroomId, language){
             originalLanguage: chat.originalLanguage,
             originalMsg: chat.content,
             translatedMsg: translatedMsg,
-            sendTime: chat.sendTime
+            sendTime: chat.sendTime,
+            portrait: chat.portrait
         })
     }
     return r
