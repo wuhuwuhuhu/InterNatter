@@ -65,6 +65,11 @@ MessageSchema.statics.getChatroomLog = async function (chatroomId, language){
             let senderUser = await mongoose.model('User').findById(msg.sender);
             senderName = senderUser.username
         }
+        let portrait = chat.portrait;
+        if(!portrait && chat.sender){
+            let senderUser = await mongoose.model('User').findById(chat.sender);
+            portrait = senderUser.image
+        }
          
         r.push({
             senderName: senderName,
@@ -72,7 +77,7 @@ MessageSchema.statics.getChatroomLog = async function (chatroomId, language){
             originalMsg: chat.content,
             translatedMsg: translatedMsg,
             sendTime: chat.sendTime,
-            portrait: chat.portrait
+            portrait
         })
     }
     return r
@@ -101,8 +106,15 @@ MessageSchema.statics.getPrivateChatLog = async function ({userId, friendId}){
         }
         let senderName = chat.senderName;
         if(!senderName && chat.sender){
-            let senderUser = await mongoose.model('User').findById(msg.sender);
+            let senderUser = await mongoose.model('User').findById(chat.sender);
             senderName = senderUser.username
+        }
+
+        let portrait = chat.portrait;
+        if(!portrait && chat.sender){
+            console.log(chat.sender)
+            let senderUser = await mongoose.model('User').findById(chat.sender);
+            portrait = senderUser.image
         }
          
         r.push({
@@ -110,7 +122,8 @@ MessageSchema.statics.getPrivateChatLog = async function ({userId, friendId}){
             originalLanguage: chat.originalLanguage,
             originalMsg: chat.content,
             translatedMsg: translatedMsg,
-            sendTime: chat.sendTime
+            sendTime: chat.sendTime,
+            portrait
         })
     }
     return r

@@ -2,7 +2,7 @@
   <% layout('layouts/boilerplate')%>
   <div id="friendList" class="col-md-3">
     <h1>Friends</h1>
-    <a class="btn custome_toggle_button dropdown-toggle" id="toggleAddFriendButton" href="/chatrooms/new">  &nbsp;&nbsp;Add Friend&nbsp;</a>
+    <a class="btn custome_toggle_button dropdown-toggle" id="toggleAddFriendButton" href="">  &nbsp;&nbsp;Add Friend&nbsp;</a>
     <div id="toggleAddFriend">
       <div class="card">
         <div class="card-body">
@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <a class="btn custome_toggle_button dropdown-toggle" id="togglePendingListButton" href="/chatrooms/new">Pending List</a>
+    <a class="btn custome_toggle_button dropdown-toggle" id="togglePendingListButton" href="">Pending List</a>
     <div id="togglePendingList">
 
     </div>
@@ -29,7 +29,7 @@
         <div class="card">
           <div class="row">
             <div class="col-md-4">
-              <img class="img-fluid" alt="" src="/images/avatars/test_user.png" style="padding-top: auto 1px;">
+              <img class="img-fluid" alt="" src="<%= friend.friendImage?friend.friendImage:"/images/avatars/default_avatar.png" %>" style="padding-top: auto 1px;">
             </div>
             <div class="col-md-8">
               <div class="card-body">

@@ -112,7 +112,7 @@ $(() => {
             </div>`);
             const $senderInfo = $(`
             <div class="col-md-2 sendInfo">
-                <img class="img-fluid" alt="" src="/images/avatars/test_user.png" style="padding-top: auto 1px;">
+                <img class="img-fluid" alt="" src="${chat.portrait?chat.portrait:"/images/avatars/default_avatar.png"}" style="padding-top: auto 1px;">
                 <h5 class="card-title">
                     ${ chat.senderName }
                 </h5>
@@ -180,7 +180,7 @@ $(() => {
                                     </div>
                                 </div>
                                 <div class="col-md-2 sendInfo">
-                                    <img class="img-fluid" alt="" src="/images/avatars/test_user.png" style="padding-top: auto 1px;">
+                                    <img class="img-fluid" alt="" src="${chat.portrait?chat.portrait:"/images/avatars/default_avatar.png"}" style="padding-top: auto 1px;">
                                     <h5 class="card-title">
                                         ${chat.senderName}
                                     </h5>
@@ -192,7 +192,7 @@ $(() => {
             newCard = `<div class="card">
                             <div class="row">
                                 <div class="col-md-2 sendInfo">
-                                    <img class="img-fluid" alt="" src="/images/avatars/test_user.png" style="padding-top: auto 1px;">
+                                    <img class="img-fluid" alt="" src="${chat.portrait?chat.portrait:"/images/avatars/default_avatar.png"}" style="padding-top: auto 1px;">
                                     <h5 class="card-title">
                                         ${chat.senderName}
                                     </h5>
@@ -246,7 +246,7 @@ $(() => {
                 <div class="card">
                     <div class="row">
                     <div class="col-md-4">
-                        <img class="img-fluid" alt="" src="${user.image?user.image:"/images/avatars/test_user.png"}" style="padding-top: auto 1px;">
+                        <img class="img-fluid" alt="" src="${user.image?user.image:"/images/avatars/default_avatar.png"}" style="padding-top: auto 1px;">
                     </div>
                     <div class="col-md-8">
                         <h5 class="card-title">${user.username}</h5>
@@ -303,11 +303,12 @@ $(() => {
                     const pendingList = responseMessage.data;
                     for(let i = 0; i < pendingList.length; i++){
                         const pendingUser = pendingList[i];
+                        debugger
                         const $card = $(`
                         <div class="card">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <img class="img-fluid" alt="" src="${pendingUser.image?user.image:"/images/avatars/test_user.png"}" style="padding-top: auto 1px;">
+                                    <img class="img-fluid" alt="" src="${pendingUser.userImage?pendingUser.userImage:"/images/avatars/default_avatar.png"}" style="padding-top: auto 1px;">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">

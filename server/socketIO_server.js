@@ -35,10 +35,11 @@ module.exports = function (user, server) {
     })
 
     socket.on('online', ({userId, sessionID}) => {
-      console.log(sessionID);
+      // console.log(sessionID);
       onlineUsers[userId] = sessionID;
       //a new user requested the friend page
       socket.on("sendPrivateMsg", async ({ msg, senderId, receiverId, senderName, senderLang }) => {
+        
         const data = {
           receiver: receiverId,
           senderName: senderName,
@@ -46,18 +47,21 @@ module.exports = function (user, server) {
           originalLanguage: senderLang     
         }
         if(senderId){
-          data.sender = senderId
+          data.sender = senderId;
+          let senderObj = await User.findById(senderId);
+          data.portrait = senderObj.image;
         }
         let msgId = await Message.createNew(data);
         io.to(sessionID).emit('receivePrivateMsg', { 
           messageId: msgId.id,
           senderName: senderName,
-          senderId: senderId
+          senderId: senderId,
+          portrait:data.portrait
         })
         // console.log(onlineUsers[receiverId]);
         // console.log(onlineUsersSessions.get(onlineUsers[receiverId]))
         if(onlineUsers[receiverId] && onlineUsersSessions.get(onlineUsers[receiverId])){
-          console.log(receiverId, "online")
+          // console.log(receiverId, "online")
           let reveiverSessionId = onlineUsers[receiverId];
           io.to(reveiverSessionId).emit('receivePrivateMsg', { 
             messageId: msgId.id,
@@ -66,7 +70,7 @@ module.exports = function (user, server) {
           })
         }
         else{
-          console.log(receiverId, "offline")
+          // console.log(receiverId, "offline")
         }
       })
     })

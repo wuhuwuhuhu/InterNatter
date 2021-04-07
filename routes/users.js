@@ -83,8 +83,18 @@ router.post('/users/getPendingList', catchAsync(async (req, res, next)=>{
     let friendinPendinglist  = await friendList.find({friendId: userId},(err, doc)=>{
         console.log(err)
     })
-    
-    return res.json({status:0, data: friendinPendinglist});
+    let r = [];
+    for(i = 0;i<friendinPendinglist.length;i++){
+        let userId = friendinPendinglist[i].userId;
+        let pendingUser = await User.findById(userId);
+        r.push({
+            userId: pendingUser.id,
+            username: pendingUser.username,
+            userImage: pendingUser.image
+        })
+
+    }
+    return res.json({status:0, data: r});
 
 }))
 
@@ -168,21 +178,26 @@ router.post('/users/getPrivateMessages', catchAsync(async (req, res, next)=>{
 router.get('/friend',catchAsync(async (req, res) => {
     const userfriend = await userFriends
 
-    userfriend.find({userId:req.user._id}, function(err, data2){
+    let friends = await userfriend.find({userId:req.user._id}, function(err, data2){
         if(err){
             console.log(err);
             return
-        }
+        }})
     
-        if(data2.length == 0) {
+        if(friends.length == 0) {
             console.log("No record found")
-            res.render('users/friend', {user: req.user,friends: data2})
+            res.render('users/friend', {user: req.user,friends: friends})
             return
         }
-        for(i = 0;i<data2.length;i++){
+        for(i = 0;i<friends.length;i++){
+            let friendId = friends[i].friendId;
+            let friend = await User.findById(friendId);
+            if(friend){
+                friends[i].friendImage = friend.image;
+            }
         // console.log(data2[i].username);
         // console.log(data2[i].userId)
-    }
+        }
       // check if the server is on
   const port = 4000;
   detect(port, (err, _port) => {
@@ -202,9 +217,9 @@ router.get('/friend',catchAsync(async (req, res) => {
       console.log(`port: ${port} was in use`);
     }
   });
-    res.render('users/friend', {user: req.user,  friends: data2})
+    res.render('users/friend', {user: req.user,  friends: friends})
         
-    })
+    
 
 }));
 
