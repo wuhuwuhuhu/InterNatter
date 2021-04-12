@@ -94,10 +94,6 @@ app.use('/', userRoutes);
 app.use('/chatrooms', chatroomRoutes);
 app.use('/validate', validateRoutes);
 
-app.get('/', (req, res) => {
-    res.render('home');
-});
-
 // take Error 404 to error handling middleware if an unexist page is visited
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page Not Found', 404)); 

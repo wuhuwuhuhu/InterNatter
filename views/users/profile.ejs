@@ -13,18 +13,18 @@
 
 <div class="profile">
 
-    <h1>PROFILE</h1>  
+    <h1><%=names["PROFILE"]%></h1>  
 
     <div id="user">
         <img class="img-circle" src= <%= user.image? user.image: "/images/avatars/default_avatar.png" %> alt="">
     </div>
 
     <dl> 
-        <dt class="profile-info">Username: <%=user.username%></dt>
+        <dt class="profile-info"><%=names["Username"]%>: <%=user.username%></dt>
      
-        <dt class="profile-info">Email: <%=user.email%></dt>
+        <dt class="profile-info"><%=names["Email"]%>: <%=user.email%></dt>
   
-        <dt class="profile-info">Language: <%=user.language%></dt>
+        <dt class="profile-info"><%=names["Language"]%>: <%=names[user.language]%></dt>
     </dl>
 
 </div>

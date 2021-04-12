@@ -1,7 +1,7 @@
 <% layout('layouts/boilerplate')%>
 <div id="chatroomList" class="col-md-3">
-    <h1>All Chatrooms</h1>
-    <a class="btn" id="createChatroomButton" href="/chatrooms/new">Create New Chatroom</a>
+    <h1><%= names["All Chatrooms"]%></h1>
+    <a class="btn" id="createChatroomButton" href="/chatrooms/new"><%= names["Create New Chatroom"]%></a>
     <% for (let chatroom of chatrooms){%>
     <div class="chatroomListItem">
         <a href="/chatrooms/<%=chatroom._id%>" class="custom-card" style="color: inherit;">

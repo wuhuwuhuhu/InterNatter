@@ -17,6 +17,13 @@ $(() => {
         $registerAlert.hide();
         $registerButton.prop( "disabled", true );
     }
+
+    $('#language').change(function () {
+        window.location.href = `/register/${$(this).val()}`;
+
+    });
+
+
     function alertMsg(isError, id, msg) {
         let $element = $(`#${id}Alert`);
         if(!isError){
@@ -42,8 +49,8 @@ $(() => {
     }
 
     function activeRegisterButton() {
-        console.log($(".alert-danger").length);
-        console.log($(".alert-success").length);
+        // console.log($(".alert-danger").length);
+        // console.log($(".alert-success").length);
         if($(".alert-danger").length === 0){
             $registerButton.prop( "disabled", false );
         }

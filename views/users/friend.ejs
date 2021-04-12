@@ -1,16 +1,16 @@
 <div class="row" style="height: 100%;">
   <% layout('layouts/boilerplate')%>
   <div id="friendList" class="col-md-3">
-    <h1>Friends</h1>
-    <a class="btn custome_toggle_button dropdown-toggle" id="toggleAddFriendButton" href="">  &nbsp;&nbsp;Add Friend&nbsp;</a>
+    <h1><%= names["Friends"]%></h1>
+    <a class="btn custome_toggle_button dropdown-toggle" id="toggleAddFriendButton" href="">  &nbsp;&nbsp;<%= names["Add Friend"]%>&nbsp;</a>
     <div id="toggleAddFriend">
       <div class="card">
         <div class="card-body">
           <form class="validated-form">
             <div class="mb-3">
-                <input class="form-control" type="text" id="searchUserInput" name="friendlist"  placeholder="Name or Email" required>
+                <input class="form-control" type="text" id="searchUserInput" name="friendlist"  placeholder="<%= names["Name or Email"]%>" required>
             </div>
-            <button class="btn btn-success" id="searchUserButton">Search</button>
+            <button class="btn btn-success" id="searchUserButton"><%= names["Search"]%></button>
         </form>
         </div>
       </div>
@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <a class="btn custome_toggle_button dropdown-toggle" id="togglePendingListButton" href="">Pending List</a>
+    <a class="btn custome_toggle_button dropdown-toggle" id="togglePendingListButton" href=""><%= names["Pending List"]%></a>
     <div id="togglePendingList">
 
     </div>
@@ -53,9 +53,9 @@
 
     </div>
     <div id="sendMsg">
-      <label for="sendMsgText">Send Message</label>
+      <label for="sendMsgText"><%= names['Send Message']%></label>
       <button id="buttonEmoji" type="button" class="btn btn-info">
-        <span>😂</span> emojis
+        <span>😂</span> <%= names['Use Emojis']%>
       </button>
       <div id='emojis'>
         <table class="">
@@ -71,8 +71,8 @@
 
       <textarea class="form-control" id="sendMsgText" rows="3" placeholder="Type here..."></textarea>
       <p class="alert alert-danger" role="alert" id="sendMsgError"></p>
-      <button type="button" class="btn btn-success" id="sendMsgButton">Send</button>
-      <button type="button" class="btn btn-warning" id="clearMsgButton">Clear</button>
+      <button type="button" class="btn btn-success" id="sendMsgButton"><%= names['Send']%></button>
+      <button type="button" class="btn btn-warning" id="clearMsgButton"><%= names['Clear']%></button>
 
     </div>
     <ul id="messages"></ul>

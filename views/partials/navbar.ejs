@@ -11,30 +11,30 @@
   </div> -->
   <ul class="nav flex-column">
     <li class="nav-item">
-      <a class="nav-link active" href="/" ><i class="fa fa-fw fa-home"></i> Home</a>
+      <a class="nav-link active" href="/"><%=names['Home Page']%></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active" href="/chatrooms"><i class="fa fa-fw fa-folder"></i>Chatrooms</a>
+      <a class="nav-link active" href="/chatrooms"><%=names['Chatrooms']%></a>
     </li>
     <!-- <li class="nav-item">
       <a class="nav-link active" href="/chatrooms/new"><i class="fa fa-fw fa-file-o"></i>New Chatroom</a>
     </li class="nav-item"> -->
     <% if(!currentUser) {%>
     <li class="nav-item">
-      <a class="nav-link active" href="/login"><i class="fa fa-fw fa-bank"></i> Login</a>
+      <a class="nav-link active" href="/login"><%=names['Login']%></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active" href="/register"><i class="fa fa-fw fa-dropbox"></i> Register</a>
+      <a class="nav-link active" href="/register"><%=names['Register']%></a>
     </li>
     <% } else {%>
     <li class="nav-item">
-      <a class="nav-link active" href="/friend"><i class="fa fa-fw fa-twitter"></i> Friends</a>
+      <a class="nav-link active" href="/friend"><%=names['Friends']%></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active" href="/profile"><i class="fa fa-fw fa-twitter"></i> Profile</a>
+      <a class="nav-link active" href="/profile"><%=names['Profile']%></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active" href="/logout"><i class="fa fa-fw fa-twitter"></i> Logout</a>
+      <a class="nav-link active" href="/logout"><%=names['Logout']%></a>
     </li>
     <% } %>
   </ul>

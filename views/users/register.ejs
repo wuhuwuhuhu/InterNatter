@@ -60,47 +60,60 @@
 
 <div class="register">
 
-    <h1>Register</h1>
+    <h1><%= names["Register"]%></h1>
 
     <form action="/register" method="POST"  class="validated-form" id="registerForm" novalidate enctype="multipart/form-data">
-        
+    
     <div class="mb-3">
-        <label class="form-label" for="username">Username</label>
+        <label class="form-label" for="language"><%= names["Language"]%></label>
+        <select class="custom-select" id="language" name="language">
+            <% for (const lang in langs) { %>
+                <option value="<%= langs[lang] %>" <%= langs[lang] == language?"selected":"" %>>
+                        <%= langs[lang] %> 
+                    </option>
+            <% } %>
+        </select>
+        <div class="valid-feedback">
+            <%= names["Looks good!"]%>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="username"><%= names["Username"]%></label>
         <input class="form-control" type="text" id="username" name="username" required>
         <!-- <small class="form-text text-muted">Between 3 - 16, Valid characters: "a-z", "A-Z", "0-9", "_" and
                 "-"</small> -->
         <p class="alert alert-danger" role="alert" id="usernameAlert"></p>
         <div class="valid-feedback">
-            Looks good!
+            <%= names["Looks good!"]%>
         </div>
     </div>
 
     <div class="mb-3">
-        <label class="form-label" for="email">Email</label>
+        <label class="form-label" for="email"><%= names["Email"]%></label>
         <input class="form-control" type="email" id="email" name="email" required>
         <p class="alert alert-danger" role="alert" id="emailAlert"></p>
         <div class="valid-feedback">
-            Looks good!
+            <%= names["Looks good!"]%>
         </div>
     </div>
 
     <div class="mb-3">
-        <label class="form-label" for="password">Password</label>
+        <label class="form-label" for="password"><%= names["Password"]%></label>
         <input class="form-control" type="password" id="password" name="password" required>
         <!-- <small class="form-text text-muted">Between 3 - 16, Valid characters: "a-z", "A-Z", "0-9", "_" and
                 "-"</small> -->
         <p class="alert alert-danger" role="alert" id="passwordAlert"></p>
         <div class="valid-feedback">
-            Looks good!
+            <%= names["Looks good!"]%>
         </div>
     </div>
 
     <div class="mb-3">
-        <label class="form-label" for="password2">Password Again</label>
+        <label class="form-label" for="password2"><%= names["Input Password Again"]%></label>
         <input class="form-control" type="password" id="password2" name="password2" required>
         <p class="alert alert-danger" role="alert" id="password2Alert"></p>
         <div class="valid-feedback">
-            Looks good!
+            <%= names["Looks good!"]%>
         </div>
     </div>
 
@@ -108,29 +121,17 @@
         <div class="form-file custom-file">
             <input type="file" class="form-file-input" id="image" name="image">
             <label class="form-file-label" for="image">
-                <span class="form-file-text custom-file-label">Choose a profile image</span>
-                <span class="form-file-button">Browse</span>
+                <span class="form-file-text custom-file-label"><%= names["Choose a profile image"]%></span>
+                <span class="form-file-button"><%= names["Browse"]%></span>
             </label>
         </div>
     </div>
 
-    <div class="mb-3">
-        <label class="form-label" for="language">Language</label>
-        <select class="custom-select" id="language" name="language">
-            <% for (const lang in langs) { %>
-                <option value="<%= langs[lang] %>" <%= langs[lang] == "English"?"selected":"" %>>
-                        <%= langs[lang] %> 
-                    </option>
-            <% } %>
-        </select>
-        <div class="valid-feedback">
-            Looks good!
-        </div>
-    </div>
+
         
     <p class="alert" role="alert" id="registerAlert"></p>
     
-    <button class="btn btn-success" id="registerButton">Register  </button>
+    <button class="btn btn-success" id="registerButton"><%= names["Register"]%>  </button>
 
     </form>
     <script src="/users/register.js"></script>

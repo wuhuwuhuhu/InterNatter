@@ -11,6 +11,7 @@ const Message = require('../models/message');
 const multer = require('multer');
 const { storage } = require('../cloudinary');
 const upload = multer({ storage });
+const {utilsTranslator, navUtilsTranslator} = require('./utilsTranslators')
 
 const validateChatroom = (req, res, next) => {
   const { error } = chatroomSchema.validate(req.body);
@@ -24,11 +25,18 @@ const validateChatroom = (req, res, next) => {
 
 router.get('/', catchAsync(async (req, res) => {
   const chatrooms = await Chatroom.find({});
-  res.render('chatrooms/index', { chatrooms });
+  let names = await navUtilsTranslator(req, res);
+  let specialNames = await utilsTranslator(req, res, ["All Chatrooms","Create New Chatroom"]);
+  names = {
+    ...names,
+    ...specialNames
+  }
+  res.render('chatrooms/index', { chatrooms, names});
 }));
 
-router.get('/new', isLoggedIn, (req, res) => {
-  res.render('chatrooms/new');
+router.get('/new', isLoggedIn, async (req, res) => {
+  const names = await navUtilsTranslator(req, res);
+  res.render('chatrooms/new', {names});
 });
 
 router.post('/', isLoggedIn, upload.array('image'), validateChatroom, catchAsync(async (req, res, next) => {
@@ -79,8 +87,18 @@ router.get('/:id', catchAsync(async (req, res) => {
   });
   const chatrooms = await Chatroom.find({});
 
-
-  res.render('chatrooms/show', { chatrooms, chatroom, data, username, userLanguage, user: req.user });
+  let names = await navUtilsTranslator(req, res);
+  let specialNames = await utilsTranslator(req, res, ["All Chatrooms","Create New Chatroom", "Delete", "Edit", "Use Emojis", "Write your message", "Send", "Clear"]);
+  // let chatroomNames = [];
+  // for(let i = 0; i < chatrooms.length; i++){
+  //   const key = chatrooms[i];
+  //   console.log(key);
+  // }
+  names = {
+    ...names,
+    ...specialNames
+  }
+  res.render('chatrooms/show', { chatrooms, chatroom, data, username, userLanguage, user: req.user, names });
 }));
 
 router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res) => {
@@ -89,7 +107,8 @@ router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res) => {
     req.flash('error', 'Cannot find that chatroom!');
     return res.redirect('/chatrooms');
   }
-  res.render('chatrooms/edit', { chatroom });
+  const names = await navUtilsTranslator(req, res);
+  res.render('chatrooms/edit', { chatroom, names });
 }));
 
 router.put('/:id', isLoggedIn, upload.array('image'), validateChatroom, catchAsync(async (req, res) => {

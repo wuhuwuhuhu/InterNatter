@@ -11,6 +11,7 @@ const Message = require('../models/message');
 const multer = require('multer');
 const { storage } = require('../cloudinary');
 const upload = multer({ storage });
+const {utilsTranslator, navUtilsTranslator} = require('./utilsTranslators')
 
 function openChatPort(req) {
     const port = 4000;
@@ -32,9 +33,36 @@ function openChatPort(req) {
         }
       });
     }
-    
-router.get('/register', (req, res) => {
-    res.render('users/register', {langs});
+
+router.get('/', async (req, res) => {
+    let names = await navUtilsTranslator(req, res);
+    let specialNames = await utilsTranslator(req, res, ["Connect Globally. Chat Globally."])
+    names = {
+        ...names,
+        ...specialNames
+    }
+    res.render('home', {names});
+
+    });
+
+router.post('/utilsTranslator', async (req, res) => {
+    const {names} = req.body;
+    res.json(await utilsTranslator(req, res, names))
+});
+
+router.get('/register', async (req, res) => {
+    res.redirect('/register/English');
+});
+
+router.get('/register/:language', async (req, res) => {
+    const language = decodeURI(req.params.language);
+    let names = await navUtilsTranslator(req, res, language);
+    let specialNames = await utilsTranslator(req, res, ["Register","Language", "Looks good!", "Username", "Email", "Password","Input Password Again","Choose a profile image","Browse","Register"], language);
+    names = {
+        ...names,
+        ...specialNames
+    }
+    res.render('users/register', {language, langs, names});
 });
 
 router.post('/register', upload.array('image'), catchAsync(async (req, res, next) => {
@@ -123,36 +151,30 @@ router.post('/users/getPendingList', catchAsync(async (req, res, next)=>{
 
 }))
 
-router.get('/login', (req, res) => {
-    res.render('users/login');
+router.get('/login', async (req, res) => {
+    res.redirect('/login/English');
+});
+
+router.get('/login/:language', async (req, res) => {
+    const language = decodeURI(req.params.language);
+    let names = await navUtilsTranslator(req, res, language);
+    let specialNames = await utilsTranslator(req, res, ["Login","Language","Looks good!" ,"Username","Password"], language);
+    names = {
+        ...names,
+        ...specialNames
+    }
+    res.render('users/login', {language, langs, names});
 });
 
 router.get('/profile',catchAsync(async (req, res) => {
-    const friendlist = await friendList
-
-    friendlist.find({friendId:req.user._id}, function(err, data){
-        if(err){
-            console.log(err);
-            return
-        }
-    
-        if(data.length == 0) {
-            console.log("No record found")
-            res.render('users/profile', {user: req.user,friend: data})
-            return
-        }
-        for(i = 0;i<data.length;i++){
-        console.log(data[i].username);
-        console.log(data[i].userId)
+    let names = await navUtilsTranslator(req, res);
+    let specialNames = await utilsTranslator(req, res,
+         ["PROFILE","Username", "Email", "Language", req.user.language]);
+    names = {
+        ...names,
+        ...specialNames
     }
-    
-    res.render('users/profile', {user: req.user,  friend: data})
-    })    
-    //const friendrequest = friendlist.find({friendId:req.user._id })
-    //console.log(friendrequest.username)
-    
-
-    
+    res.render('users/profile', {user: req.user, names})
 }));
 
 router.post('/users/friendRequestProcess', catchAsync(async (req, res, next)=>{
@@ -202,7 +224,12 @@ router.post('/users/getPrivateMessages', catchAsync(async (req, res, next)=>{
 }));
 router.get('/friend',catchAsync(async (req, res) => {
     const userfriend = await userFriends
-
+    let names = await navUtilsTranslator(req, res);
+    let specialNames = await utilsTranslator(req, res, ["Friends","Add Friend", "Search", "Name or Email", "Pending List", "Send Message","Use Emojis","Send","Clear"]);
+    names = {
+        ...names,
+        ...specialNames
+    }
     let friends = await userfriend.find({userId:req.user._id}, function(err, data2){
         if(err){
             console.log(err);
@@ -211,7 +238,7 @@ router.get('/friend',catchAsync(async (req, res) => {
     
         if(friends.length == 0) {
             console.log("No record found")
-            res.render('users/friend', {user: req.user,friends: friends})
+            res.render('users/friend', {user: req.user,friends: friends, names})
             return
         }
         for(i = 0;i<friends.length;i++){
@@ -225,7 +252,8 @@ router.get('/friend',catchAsync(async (req, res) => {
         }
       // check if the server is on
       openChatPort(req);
-      res.render('users/friend', {user: req.user,  friends: friends})
+
+      res.render('users/friend', {user: req.user,  friends: friends, names})
         
     
 

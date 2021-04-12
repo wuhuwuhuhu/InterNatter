@@ -14,8 +14,8 @@
                     <% if(currentUser && chatroom.creator.equals(currentUser._id)) { %>
                         <div>
                             <form action="/chatrooms/<%=chatroom._id%>?_method=DELETE" method="POST">
-                                <button class="btn btn-danger">Delete</button>
-                                <a class="btn btn-secondary" href="/chatrooms/<%=chatroom._id%>/edit" role="button">Edit</a>
+                                <button class="btn btn-danger"><%= names['Delete']%></button>
+                                <a class="btn btn-secondary" href="/chatrooms/<%=chatroom._id%>/edit" role="button"><%= names['Edit']%></a>
                             </form>
                         </div>
                     <% } %>
@@ -74,10 +74,10 @@
         <hr>
 
         <div id="sendMsg">
-            <p>Write your message:</p>
+            <p><%= names['Write your message']%>:</p>
             <!-- <label for="sendMsgText">Write a Message</label> -->
             <button id="buttonEmoji" type="button" class="btn btn-info">
-                <span>😂</span>  Use Emojis
+                <span>😂</span>  <%= names['Use Emojis']%>
             </button>
             <div id='emojis'>
                 <table class="">
@@ -92,8 +92,8 @@
     
             <textarea class="form-control" id="sendMsgText" rows="3" placeholder="Type here..."></textarea>
             <p class="alert alert-danger" role="alert" id="sendMsgError"></p>
-            <button type="button" class="btn btn-success" id="sendMsgButton">Send</button>
-            <button type="button" class="btn btn-warning" id="clearMsgButton">Clear</button>
+            <button type="button" class="btn btn-success" id="sendMsgButton"><%= names['Send']%></button>
+            <button type="button" class="btn btn-warning" id="clearMsgButton"><%= names['Clear']%></button>
     
         </div>
 
