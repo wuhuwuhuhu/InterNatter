@@ -2,11 +2,14 @@
 
 
 #friendList {
+    position:fixed;
     text-align: center;
     font-family: 'Montserrat', sans-serif;
     background-image: linear-gradient(to bottom right, #CAF2F1, #E0F6FB);
     height: 100%;
     background: rgb(174, 131, 190);
+    overflow-y: auto;
+    width: 28%;
 }
 
 #friendList a {
@@ -41,7 +44,7 @@
     /* position: fixed; */
     /* padding-left: 50%; */
     /* margin-left: 25%; */
-    padding-right: 100px;
+    /* padding-right: 100px; */
     /* height: 100%; */
 }
 
@@ -109,7 +112,7 @@
     padding-right: 0px;
 } */
 
-.card:hover {
+#chatLog .card:hover {
     transform: scale(1.02);
     /* box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06); */
     box-shadow: black;

@@ -2,11 +2,14 @@
 
 
 #chatroomList {
+    position: fixed;
     text-align: center;
     font-family: 'Montserrat', sans-serif;
     background-image: linear-gradient(to bottom right, #CAF2F1, #E0F6FB);
     height: 100%;
     background: rgb(174, 131, 190);
+    overflow-y: auto;
+    width: 28%;
 }
 
 #chatroomList a {
@@ -28,5 +31,5 @@
 }
 
 #chatroomList .chatroomListItem {
-    margin-top: 10px;
+    margin-top: 25px;
 }

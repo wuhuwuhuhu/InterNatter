@@ -1,12 +1,13 @@
 <div class="row" style="height: 100%;">
     <%- include('./index')%>
-
-    <div  class="col-md-9" id="chatroom">
+    <div  class="col-md-4"></div>
+    <div  class="col-md-8" id="chatroom">
 
         <div class="row" id="chatroomInfo">
             <div class="col-md-2">
                 <img class="img-fluid" alt="" src="<%=chatroom.image%>">
             </div>
+            
             <div class="col-md-10" id="chatroomInfoText">
                     <h4><%= chatroom.title %> </h4>
                     <p><%= chatroom.description %></p>
@@ -24,7 +25,7 @@
 
         <hr>
 
-        <div id="chatLog">
+        <div id="chatLog" >
             <% for(let i=0; i < data.length; i++) {%>
                 <% let chat=data[i]%>
                 <div class="card <%= username === chat.senderName? 'myMsg':''%>">

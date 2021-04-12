@@ -99,6 +99,7 @@ $(() => {
 
     function createChatLog(data) {
         $chatLog.empty();
+        scrollTo(0,0);
         for (let i = 0; i < data.length; i++) {
             const chat = data[i];
             const $card = $(` 

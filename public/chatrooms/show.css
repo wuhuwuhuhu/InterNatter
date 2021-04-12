@@ -1,24 +1,28 @@
 #chatroom {
     background: rgb(209, 176, 221);
-    /* position: fixed; */
+    /* overflow: scroll; */
     /* padding-left: 50%; */
-    /* margin-left: 25%; */
-    padding-right: 100px;
+    
+    /* padding-right: 100px; */
     /* height: 100%; */
 }
 
 #chatroomInfo {
     background: rgb(209, 176, 221);
     color: white;
+    position: fixed; 
+    z-index: 1; 
+    background-color: inherit;
+    width: 100%;
 }
 
 #chatroomInfo img {
-    width: 100%;
+    width: 50%;
     border-radius: 30%;
 }
 
 #chatLog {
-    margin-top: 10px;
+    margin-top: 15%
 }
 
 #chatLog img {
@@ -71,7 +75,7 @@
     padding-right: 0px;
 } */
 
-.card:hover {
+#chatLog .card:hover {
     transform: scale(1.02);
     /* box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06); */
     box-shadow: black;
