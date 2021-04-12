@@ -17,7 +17,7 @@ let MessageSchema = new Schema({
 MessageSchema.statics.createNew = async function (data){
     data.versions = {};
     data.versions[data.originalLanguage] = data.content;
-    
+    data.sendTime = new Date();
     return await mongoose.model('Message').create(data)
 }
 MessageSchema.statics.getMessage = async function (msgId, senderName, language){
@@ -112,7 +112,7 @@ MessageSchema.statics.getPrivateChatLog = async function ({userId, friendId}){
 
         let portrait = chat.portrait;
         if(!portrait && chat.sender){
-            console.log(chat.sender)
+            // console.log(chat.sender)
             let senderUser = await mongoose.model('User').findById(chat.sender);
             portrait = senderUser.image
         }
