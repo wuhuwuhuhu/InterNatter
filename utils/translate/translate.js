@@ -34,6 +34,9 @@ const translate = async ({text, from, to}) => {
     code = 0;
     data = "";
     msg = "";
+    if(text.length === 0){
+        return {code:0, text: emojiString};
+    }
     if(from) {
         try {
             const res = await translator(text, {from,to});
