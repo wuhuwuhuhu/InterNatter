@@ -44,7 +44,6 @@ $(() => {
                 userId,
                 sessionID
             });
-            console.log('send')
         })
 
         socket.on('receivePrivateMsg', ({

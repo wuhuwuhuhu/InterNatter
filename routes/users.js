@@ -12,6 +12,27 @@ const multer = require('multer');
 const { storage } = require('../cloudinary');
 const upload = multer({ storage });
 
+function openChatPort(req) {
+    const port = 4000;
+      detect(port, (err, _port) => {
+        if (err) {
+          console.log(err);
+        }
+      
+        if (port == _port) {
+          const app = express();
+          const server = require('http').createServer(app);
+          require('../server/socketIO_server')(req.user, server);
+          server.listen(4000, () => {
+            console.log("Serving on port 4000");
+          })
+          // console.log(`port: ${port} was not occupied`);
+        } else {
+        //   console.log(`port: ${port} was in use`);
+        }
+      });
+    }
+    
 router.get('/register', (req, res) => {
     res.render('users/register', {langs});
 });
@@ -27,6 +48,7 @@ router.post('/register', upload.array('image'), catchAsync(async (req, res, next
             res.cookie('username', req.user.username, { maxAge: 1000 * 60 * 60 * 24 * 7 })
             res.cookie('userLanguage', req.user.language, { maxAge: 1000 * 60 * 60 * 24 * 7 })
             res.cookie('userId', JSON.stringify(req.user._id), { maxAge: 1000 * 60 * 60 * 24 * 7 })
+            openChatPort(req);
             req.flash('success', "Welcome to InterNatter");
             res.redirect('/chatrooms');
         })
@@ -202,25 +224,8 @@ router.get('/friend',catchAsync(async (req, res) => {
         // console.log(data2[i].userId)
         }
       // check if the server is on
-  const port = 4000;
-  detect(port, (err, _port) => {
-    if (err) {
-      console.log(err);
-    }
-  
-    if (port == _port) {
-      const app = express();
-      const server = require('http').createServer(app);
-      require('../server/socketIO_server')(req.user, server);
-      server.listen(4000, () => {
-        console.log("Serving on port 4000");
-      })
-      // console.log(`port: ${port} was not occupied`);
-    } else {
-      console.log(`port: ${port} was in use`);
-    }
-  });
-    res.render('users/friend', {user: req.user,  friends: friends})
+      openChatPort(req);
+      res.render('users/friend', {user: req.user,  friends: friends})
         
     
 
@@ -230,6 +235,7 @@ router.post('/login', passport.authenticate('local', { failureFlash: true, failu
     res.cookie('username', req.user.username, { maxAge: 1000 * 60 * 60 * 24 * 7 })
     res.cookie('userLanguage', req.user.language, { maxAge: 1000 * 60 * 60 * 24 * 7 })
     res.cookie('userId', JSON.stringify(req.user._id), { maxAge: 1000 * 60 * 60 * 24 * 7 })
+    openChatPort(req);
     req.flash('success', 'Welcome Back!');
     const redirectUrl = req.session.returnTo || '/chatrooms'; 
     delete req.session.returnTo;
