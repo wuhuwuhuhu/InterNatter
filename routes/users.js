@@ -69,7 +69,12 @@ router.post('/register', upload.array('image'), catchAsync(async (req, res, next
     try {
         const { email, username, password, language } = req.body;
         const user = new User({ email, username, language });
-        user.image = req.files[0].path;
+        //check whether user didn't upload image, if not use the default one
+        if(req.files && req.files[0] && req.files[0].path){
+            user.image = req.files[0].path;
+        }else{
+            user.image = '/images/avatars/default_avatar.png';
+        }
         const registeredUser = await User.register(user, password);
         req.login(registeredUser, err => {
             if (err) return next(err);
