@@ -74,7 +74,7 @@ $(() => {
                                         <h6 class="card-subtitle mb-2 text-muted">
                                             ${new Date(chat.sendTime).toLocaleString()}
                                         </h6>
-                                        <p class="card-text">
+                                        <p class="originalData card-text" style="display: none;">
                                             Original: ${chat.originalMsg} (Language: ${decodeURI(chat.originalLanguage)})
                                         </p>
                                         <p class="card-text">
@@ -105,7 +105,7 @@ $(() => {
                                         <h6 class="card-subtitle mb-2 text-muted">
                                             ${chat.sendTime.toLocaleString()}
                                         </h6>
-                                        <p class="card-text">
+                                        <p class="originalData card-text" style="display: none;">
                                             Original: ${chat.originalMsg} (Language: ${decodeURI(chat.originalLanguage)})
                                         </p>
                                         <p class="card-text">
@@ -132,4 +132,13 @@ $(() => {
         $sendMsgText.val($sendMsgText.val() + value);
     })
 
+    //toggle original data
+    $('#chatLog').on("mouseenter",".card", function() {
+        console.log($(this).find(".originalData"))
+        $($(this).find(".originalData")).show();
+    } );
+    $('#chatLog').on("mouseleave",".card", function() {
+        console.log($(this).find(".originalData"))
+        $($(this).find(".originalData")).hide();
+    } );
 })
