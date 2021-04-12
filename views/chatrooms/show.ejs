@@ -9,8 +9,8 @@
             </div>
             
             <div class="col-md-10" id="chatroomInfoText">
-                    <h4><%= chatroom.title %> </h4>
-                    <p><%= chatroom.description %></p>
+                    <h4><%= names[chatroom.title] %> </h4>
+                    <p><%= names[chatroom.description] %></p>
                     <% if(currentUser && chatroom.creator.equals(currentUser._id)) { %>
                         <div>
                             <form action="/chatrooms/<%=chatroom._id%>?_method=DELETE" method="POST">

@@ -27,9 +27,15 @@ router.get('/', catchAsync(async (req, res) => {
   const chatrooms = await Chatroom.find({});
   let names = await navUtilsTranslator(req, res);
   let specialNames = await utilsTranslator(req, res, ["All Chatrooms","Create New Chatroom"]);
+  let chatroomNames = [];
+  for(let i = 0; i < chatrooms.length; i++){
+    const chatroom = chatrooms[i];
+    chatroomNames.push(chatroom.title, chatroom.description);
+  }
   names = {
     ...names,
-    ...specialNames
+    ...specialNames,
+    ...await utilsTranslator(req, res, chatroomNames)
   }
   res.render('chatrooms/index', { chatrooms, names});
 }));
@@ -89,14 +95,15 @@ router.get('/:id', catchAsync(async (req, res) => {
 
   let names = await navUtilsTranslator(req, res);
   let specialNames = await utilsTranslator(req, res, ["All Chatrooms","Create New Chatroom", "Delete", "Edit", "Use Emojis", "Write your message", "Send", "Clear"]);
-  // let chatroomNames = [];
-  // for(let i = 0; i < chatrooms.length; i++){
-  //   const key = chatrooms[i];
-  //   console.log(key);
-  // }
+  let chatroomNames = [];
+  for(let i = 0; i < chatrooms.length; i++){
+    const chatroom = chatrooms[i];
+    chatroomNames.push(chatroom.title, chatroom.description);
+  }
   names = {
     ...names,
-    ...specialNames
+    ...specialNames,
+    ...await utilsTranslator(req, res, chatroomNames)
   }
   res.render('chatrooms/show', { chatrooms, chatroom, data, username, userLanguage, user: req.user, names });
 }));
