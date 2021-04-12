@@ -289,3 +289,13 @@ body {
   border-color: black;
   box-shadow: 0 0 10px 0 #380b80;
 }
+
+#toasts{
+  position:fixed;
+  z-index: 2;
+  margin: 5px;
+}
+
+.toast-header img{
+  width: 20%;
+}

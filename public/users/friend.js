@@ -389,11 +389,11 @@ $(() => {
 
     //toggle original data
     $('#chatLog').on("mouseenter", ".card", function () {
-        console.log($(this).find(".originalData"))
+        // console.log($(this).find(".originalData"))
         $($(this).find(".originalData")).show();
     });
     $('#chatLog').on("mouseleave", ".card", function () {
-        console.log($(this).find(".originalData"))
+        // console.log($(this).find(".originalData"))
         $($(this).find(".originalData")).hide();
     });
 })
