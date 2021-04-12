@@ -59,8 +59,11 @@ router.post('/users/addFriend', catchAsync(async (req, res, next)=>{
         console.log(err)
     })
     let friendinlist = await userFriends.find({userId, friendId});
-    if(friendinPendinglist.length != 0 || friendinlist.length != 0){
+    if(friendinlist.length != 0){
         return res.json({status:1, msg:"User already in friendlist"});
+    }
+    if(friendinPendinglist.length != 0){
+        return res.json({status:1, msg:"You are in pending list."});
     }
     let friendConnection = new friendList({userId, username: user.username, friendId,friendname: friend.username })
                             
