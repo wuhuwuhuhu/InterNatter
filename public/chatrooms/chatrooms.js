@@ -72,7 +72,7 @@ $(() => {
                                 <div class="col-md-10">
                                     <div class="card-body">
                                         <h6 class="card-subtitle mb-2 text-muted">
-                                            ${chat.sendTime.toLocaleString()}
+                                            ${new Date(chat.sendTime).toLocaleString()}
                                         </h6>
                                         <p class="card-text">
                                             Original: ${chat.originalMsg} (Language: ${decodeURI(chat.originalLanguage)})
