@@ -256,6 +256,7 @@ $(() => {
         event.preventDefault();
         $toggleAddFriendList.empty();
         const keyword = $('#searchUserInput').val();
+        if(keyword.length === 0){return;}
         $.post("users/search", {
             keyword
         }, function (data) {
