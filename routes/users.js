@@ -96,6 +96,19 @@ router.post('/users/search', catchAsync(async (req, res, next)=>{
     let reg = new RegExp(`${keyword}`,"ig");
     const results = await User.find({$or:[{"username": reg},{"email": reg}]},(err, doc)=>{
     });
+    let userLanguageList = new Set();
+    for (let i = 0; i < results.length; i++){
+        const user = results[i];
+        userLanguageList.add(user.language);
+    }
+    let userLanguageMap = await utilsTranslator(req, res, [...userLanguageList]);
+    for (let i = 0; i < results.length; i++){
+        const user = results[i];
+        if(userLanguageMap[user.language]){
+            user.language = userLanguageMap[user.language];
+        }
+        
+    }
     return res.json(results);
 }))
 
