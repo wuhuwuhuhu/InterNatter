@@ -8,14 +8,25 @@ $(() => {
     $language = $('#language');
     $registerAlert = $('#registerAlert');
     $registerButton = $('#registerButton');
+    const errorUtilsList = ["Please provide valid username", "Please provide valid email", "Please provide valid password","Please provide same password again", "Good choice, this username has not been registered", "Good choice, this email has not been registered", "Good choice", "Error: this username has been registered, please use another one", "Error: this email has been registered, please use another one"];
+    const utilsList = [...errorUtilsList];
+    let utilsMap = {};
     init();
     function  init() {
         $("#usernameAlert").hide();
         $("#emailAlert").hide();
         $("#passwordAlert").hide();
         $("#password2Alert").hide();
+        $.post("/utilsTranslator", {names: utilsList, selectedlanguage: $('#language').val()}, function(data){
+            utilsMap = data;
+        })
+
         $registerAlert.hide();
         $registerButton.prop( "disabled", true );
+    }
+    function getUtilsMap(key){
+        if(utilsMap[key]) return utilsMap[key];
+        return key;
     }
 
     $('#language').change(function () {
@@ -33,7 +44,7 @@ $(() => {
             $element.removeClass("alert-success");
             $element.addClass("alert-danger");
         }
-        $element.html(msg);
+        $element.html(getUtilsMap(msg));
         $element.show();
         activeRegisterButton();
 
@@ -67,7 +78,7 @@ $(() => {
             if(responseMessage.code == 0){
                 alertMsg(true, "username", responseMessage.error);
             }else{
-                alertMsg(false, "username", `Good choice, ${value} has not been registered as username.`);
+                alertMsg(false, "username", `Good choice, this username has not been registered`);
             }
         });
         activeRegisterButton();
@@ -81,7 +92,7 @@ $(() => {
             if(responseMessage.code == 0){
                 alertMsg(true, "email", responseMessage.error);
             }else{
-                alertMsg(false, "email", `Good choice, ${value} has not been registered as email.`);
+                alertMsg(false, "email", `Good choice, this email has not been registered`);
                 return;
             }
         });
@@ -92,17 +103,17 @@ $(() => {
         let value = $password.val();
         let passwordPattern = /^[\w_-]{3,16}$/;
         if(!checkRegValid($password, passwordPattern)) return;
-        alertMsg(false, "password", "Good choice.");
+        alertMsg(false, "password", "Good choice");
         activeRegisterButton();
     })
 
     $password2.blur(function () {
         let value = $password2.val();
         if($password.val() != value){
-            alertMsg(true, "password2", "Please provide same password again.");
+            alertMsg(true, "password2", "Please provide same password again");
             return;
         }
-        alertMsg(false, "password2", "Good choice.");
+        alertMsg(false, "password2", "Good choice");
         activeRegisterButton();
 
     })

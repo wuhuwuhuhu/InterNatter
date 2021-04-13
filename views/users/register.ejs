@@ -80,8 +80,7 @@
     <div class="mb-3">
         <label class="form-label" for="username"><%= names["Username"]%></label>
         <input class="form-control" type="text" id="username" name="username" required>
-        <!-- <small class="form-text text-muted">Between 3 - 16, Valid characters: "a-z", "A-Z", "0-9", "_" and
-                "-"</small> -->
+        <small class="form-text text-muted"><%= names[`Between 3 - 16, Valid characters: "a-z", "A-Z", "0-9", "_" and "-"`]%></small>
         <p class="alert alert-danger" role="alert" id="usernameAlert"></p>
         <div class="valid-feedback">
             <%= names["Looks good!"]%>
@@ -100,8 +99,7 @@
     <div class="mb-3">
         <label class="form-label" for="password"><%= names["Password"]%></label>
         <input class="form-control" type="password" id="password" name="password" required>
-        <!-- <small class="form-text text-muted">Between 3 - 16, Valid characters: "a-z", "A-Z", "0-9", "_" and
-                "-"</small> -->
+        <small class="form-text text-muted"><%= names[`Between 3 - 16, Valid characters: "a-z", "A-Z", "0-9", "_" and "-"`]%></small>
         <p class="alert alert-danger" role="alert" id="passwordAlert"></p>
         <div class="valid-feedback">
             <%= names["Looks good!"]%>

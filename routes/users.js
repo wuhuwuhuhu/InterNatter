@@ -46,8 +46,8 @@ router.get('/', async (req, res) => {
     });
 
 router.post('/utilsTranslator', async (req, res) => {
-    const {names} = req.body;
-    res.json(await utilsTranslator(req, res, names))
+    const {names, selectedlanguage, originalLanguage} = req.body;
+    res.json(await utilsTranslator(req, res, names, selectedlanguage, originalLanguage))
 });
 
 router.get('/register', async (req, res) => {
@@ -57,7 +57,7 @@ router.get('/register', async (req, res) => {
 router.get('/register/:language', async (req, res) => {
     const language = decodeURI(req.params.language);
     let names = await navUtilsTranslator(req, res, language);
-    let specialNames = await utilsTranslator(req, res, ["Register","Language", "Looks good!", "Username", "Email", "Password","Input Password Again","Choose a profile image","Browse","Register"], language);
+    let specialNames = await utilsTranslator(req, res, ["Register","Language", "Looks good!", "Username", "Email", "Password","Input Password Again","Choose a profile image","Browse","Register", `Between 3 - 16, Valid characters: "a-z", "A-Z", "0-9", "_" and "-"`], language);
     names = {
         ...names,
         ...specialNames

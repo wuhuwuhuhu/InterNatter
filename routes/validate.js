@@ -10,7 +10,7 @@ router.get("/checkRepeat", async (req, res) => {
         let value = req.query[variable];
         await User.findOne({[variable]: value},function (err,doc){
             if(doc){
-                error = `Error: ${value} has been registered as ${variable}, please use another one.`
+                error = `Error: this ${variable} has been registered, please use another one`
             }
         });
     }
