@@ -1,10 +1,10 @@
 <% layout('layouts/boilerplate')%>
 <div class="row">
-    <h1 class="text-center">Edit Chatroom</h1>
+    <h1 class="text-center"><%= names["Edit Chatroom"] %></h1>
     <div class="col-6 offset-3">
         <form action="/chatrooms/<%=chatroom._id%>?_method=PUT" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
             <div class="mb-3">
-                <label class="form-label" for="title">Title</label>
+                <label class="form-label" for="title"><%= names["Title"] %></label>
                 <input class="form-control" type="text" id="title" name="chatroom[title]"
                     value="<%=chatroom.title %>" required>
                 <div class="valid-feedback">
@@ -21,7 +21,7 @@
             </div> -->
             <!-- <input type="file" name="image" id=""> -->
             <div class="mb-3">
-                <label class="form-label" for="description">Description</label>
+                <label class="form-label" for="description"><%= names["Description"] %></label>
                 <textarea class="form-control" type="text" id="description" name="chatroom[description]"
                     required><%= chatroom.description%></textarea>
                 <div class="valid-feedback">
@@ -32,16 +32,16 @@
                 <div class="form-file custom-file">
                     <input type="file" class="form-file-input" id="image" name="image">
                     <label class="form-file-label" for="image">
-                        <span class="form-file-text custom-file-label">Choose an image</span>
-                        <span class="form-file-button">Browse</span>
+                        <span class="form-file-text custom-file-label"><%= names["Choose an image"] %></span>
+                        <span class="form-file-button"><%= names["Browse"] %></span>
                     </label>
                 </div>
             </div>
             <div class="mb-3">
-                <button class="btn btn-info">Update Chatroom</button>
+                <button class="btn btn-info"><%= names["Update Chatroom"] %></button>
             </div>
         </form>
-        <a href="/chatrooms/<%= chatroom._id%>">Back To Chatrooms</a>
+        <a href="/chatrooms/<%= chatroom._id%>"><%= names["Back To Chatrooms"] %></a>
 
     </div>
 </div>

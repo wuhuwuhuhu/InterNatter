@@ -1,42 +1,25 @@
 <% layout('layouts/boilerplate')%>
 <div class="rowx">
     
-    <h1 class="text-center">New Chatroom</h1>
+    <h1 class="text-center"><%= names["New Chatroom"] %></h1>
     
     <div class="col-6 offset-3">
         
         <form action="/chatrooms" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
             
             <div class="mb-3">
-                <label class="form-label" for="title">Title</label>
+                <label class="form-label" for="title"><%= names["Title"] %></label>
                 <input class="form-control" type="text" id="title" name="chatroom[title]" required>
                 <div class="valid-feedback">
-                    Looks good!
+                    <%= names["Looks good!"] %>
                 </div>
             </div>
-            <!-- <input type="file" name="image" id=""> -->
-            <!-- <div class="mb-3">
-                <div class="form-file custom-file">
-                    <input type="file" class="form-file-input" id="image" name="image">
-                    <label class="form-file-label" for="image">
-                        <span class="form-file-text custom-file-label">Choose an image</span>
-                        <span class="form-file-button">Browse</span>
-                    </label>
-                </div>
-            </div> -->
-            <!-- <div class="mb-3">
-                <label class="form-label" for="image">Image Url</label>
-                <input class="form-control" type="text" id="image" name="chatroom[image]" required>
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
-            </div> -->
             <div class="mb-3">
-                <label class="form-label" for="description">Description</label>
+                <label class="form-label" for="description"><%= names["Description"] %></label>
                 <textarea class="form-control" type="text" id="description" name="chatroom[description]"
                     required></textarea>
                 <div class="valid-feedback">
-                    Looks good!
+                    <%= names["Looks good!"] %>
                 </div>
             </div>
 
@@ -44,19 +27,19 @@
                 <div class="form-file custom-file">
                     <input type="file" class="form-file-input" id="image" name="image">
                     <label class="form-file-label" for="image">
-                        <span class="form-file-text custom-file-label">Choose an image</span>
-                        <span class="form-file-button">Browse</span>
+                        <span class="form-file-text custom-file-label"><%= names["Choose an image"] %></span>
+                        <span class="form-file-button"><%= names["Browse"] %></span>
                     </label>
                 </div>
             </div>
 
             <div class="mb-3">
-                <button class="btn btn-success">Add Chatroom</button>
+                <button class="btn btn-success"><%= names["Add Chatroom"] %></button>
             </div>
 
         </form>
 
-        <a class="imx" href="/chatrooms">All Chatrooms</a>
+        <a class="imx" href="/chatrooms"><%= names["All Chatrooms"] %></a>
     
     </div>
 </div>

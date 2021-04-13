@@ -41,7 +41,12 @@ router.get('/', catchAsync(async (req, res) => {
 }));
 
 router.get('/new', isLoggedIn, async (req, res) => {
-  const names = await navUtilsTranslator(req, res);
+  let names = await navUtilsTranslator(req, res);
+  let specialNames = await utilsTranslator(req, res, ["New Chatroom", "Title", "Looks good!", "Description", "Choose an image", "Browse", "Add Chatroom", "All Chatrooms"]);
+  names = {
+    ...names,
+    ...specialNames,
+  }
   res.render('chatrooms/new', {names});
 });
 
@@ -110,11 +115,16 @@ router.get('/:id', catchAsync(async (req, res) => {
 
 router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res) => {
   const chatroom = await Chatroom.findById(req.params.id);
+  let names = await navUtilsTranslator(req, res);
+  let specialNames = await utilsTranslator(req, res, ["New Chatroom", "Title", "Looks good!", "Description", "Choose an image", "Browse", "Update Chatroom", "Back To Chatrooms"]);
+  names = {
+    ...names,
+    ...specialNames,
+  }
   if (!chatroom) {
     req.flash('error', 'Cannot find that chatroom!');
     return res.redirect('/chatrooms');
   }
-  const names = await navUtilsTranslator(req, res);
   res.render('chatrooms/edit', { chatroom, names });
 }));
 
