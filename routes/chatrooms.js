@@ -35,7 +35,7 @@ router.get('/', catchAsync(async (req, res) => {
   names = {
     ...names,
     ...specialNames,
-    ...await utilsTranslator(req, res, chatroomNames)
+    ...await utilsTranslator(req, res, chatroomNames,"", "auto")
   }
   res.render('chatrooms/index', { chatrooms, names});
 }));
@@ -108,7 +108,7 @@ router.get('/:id', catchAsync(async (req, res) => {
   names = {
     ...names,
     ...specialNames,
-    ...await utilsTranslator(req, res, chatroomNames)
+    ...await utilsTranslator(req, res, chatroomNames,"", "auto")
   }
   res.render('chatrooms/show', { chatrooms, chatroom, data, username, userLanguage, user: req.user, names });
 }));
