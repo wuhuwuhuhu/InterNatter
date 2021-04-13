@@ -99,7 +99,7 @@ router.get('/:id', catchAsync(async (req, res) => {
   const chatrooms = await Chatroom.find({});
 
   let names = await navUtilsTranslator(req, res);
-  let specialNames = await utilsTranslator(req, res, ["All Chatrooms","Create New Chatroom", "Delete", "Edit", "Use Emojis", "Write your message", "Send", "Clear"]);
+  let specialNames = await utilsTranslator(req, res, ["All Chatrooms","Create New Chatroom", "Delete", "Edit", "Use Emojis", "Write your message", "Send", "Clear", "Type here..."]);
   let chatroomNames = [];
   for(let i = 0; i < chatrooms.length; i++){
     const chatroom = chatrooms[i];

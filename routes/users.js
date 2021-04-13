@@ -108,14 +108,14 @@ router.post('/users/addFriend', catchAsync(async (req, res, next)=>{
     let user = await User.findById(userId);
     let friend = await User.findById(friendId);
     if(!user || !friend){
-        return res.json({status:1, msg:"Error: user doesnt exist"});
+        return res.json({status:1, msg:"Error: user doesnt exist."});
     }
     let friendinPendinglist  = await friendList.find({userId, friendId},(err, doc)=>{
         console.log(err)
     })
     let friendinlist = await userFriends.find({userId, friendId});
     if(friendinlist.length != 0){
-        return res.json({status:1, msg:"User already in friendlist"});
+        return res.json({status:1, msg:"User already in friendlist."});
     }
     if(friendinPendinglist.length != 0){
         return res.json({status:1, msg:"You are in pending list."});
@@ -230,7 +230,7 @@ router.post('/users/getPrivateMessages', catchAsync(async (req, res, next)=>{
 router.get('/friend',catchAsync(async (req, res) => {
     const userfriend = await userFriends
     let names = await navUtilsTranslator(req, res);
-    let specialNames = await utilsTranslator(req, res, ["Friends","Add Friend", "Search", "Name or Email", "Pending List", "Send Message","Use Emojis","Send","Clear"]);
+    let specialNames = await utilsTranslator(req, res, ["Friends","Add Friend", "Search", "Name or Email", "Pending List", "Send Message","Use Emojis","Send","Clear", "Type here..."]);
     names = {
         ...names,
         ...specialNames

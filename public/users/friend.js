@@ -11,7 +11,9 @@ $(() => {
     const $togglePendingList = $('#togglePendingList');
     const $toggleAddFriendList = $('#toggleAddFriendList')
     const $searchUserButton = $('#searchUserButton')
-
+    const errorUtilsList = ["Error: can not add your self.", "Error: user doesnt exist.", "User already in friendlist.","You are in pending list.", "Can not add"];
+    const utilsList = [...errorUtilsList, "No Pending Request.", "Failed", "Pending", "Add", "Accept", "Reject", "Accepted", "Rejected", "Please write something before send."];
+    let utilsMap = {};
     let username = '';
     let userLanguage = '';
     let userId = '';
@@ -50,6 +52,9 @@ $(() => {
         if (!userLanguage) {
             userLanguage = "English";
         }
+        $.post("/utilsTranslator", {names: utilsList}, function(data){
+            utilsMap = data;
+        })
         $sendMsgError.hide()
         $friendChat.hide()
         $toggleAddFriend.hide();
@@ -58,6 +63,10 @@ $(() => {
             $sendMsgError.html("")
             $sendMsgError.hide()
         })
+    }
+    function getUtilsMap(key){
+        if(utilsMap[key]) return utilsMap[key];
+        return key;
     }
 
     function createChat(receiverID) {
@@ -149,7 +158,7 @@ $(() => {
 
         if (msg === undefined || msg.trim().length === 0) {
             $sendMsgError.show()
-            $sendMsgError.html("Please write something before send.")
+            $sendMsgError.html(`${getUtilsMap("Please write something before send.")}`)
             return;
         }
 
@@ -279,7 +288,7 @@ $(() => {
                     </div>
                     </div>
                     <div class="row">
-                    <a href="#" newFriendId="${user._id}" class="btn btn-success btn-sm friend_add_request">Add</a>
+                    <a href="#" newFriendId="${user._id}" class="btn btn-success btn-sm friend_add_request">${getUtilsMap("Add")}</a>
                     </div>
               </div>
               `)
@@ -299,15 +308,15 @@ $(() => {
             if (res.status === 1) {
                 let $error = $(`
                 <div class="alert alert-warning" role="alert" style="width:80%; margin-left: 10%;
-                margin-top: 5px;">${res.msg}</div>
+                margin-top: 5px;">${getUtilsMap(res.msg)}</div>
                 `)
                 $target.after($error)
 
-                $target.text("Failed")
+                $target.text(`${getUtilsMap("Failed")}`)
                 $target.removeClass("btn-success");
                 $target.addClass("btn-danger");
             } else {
-                $target.text("Pending")
+                $target.text(`${getUtilsMap("Pending")}`)
             }
             $target.addClass("disabled");
         })
@@ -321,12 +330,11 @@ $(() => {
         }, function (responseMessage) {
             if (responseMessage.status === 0) {
                 if (responseMessage.data.length === 0) {
-                    $togglePendingList.append('<span>No Pending Request.</span>')
+                    $togglePendingList.append(`<span>${getUtilsMap("No Pending Request.")}</span>`)
                 } else {
                     const pendingList = responseMessage.data;
                     for (let i = 0; i < pendingList.length; i++) {
                         const pendingUser = pendingList[i];
-                        debugger
                         const $card = $(`
                         <div class="card">
                             <div class="row">
@@ -340,8 +348,8 @@ $(() => {
                                 </div>
                             </div>
                             <div class="row" pendingFriendId="${pendingUser.userId}" pendingFriendName="${pendingUser.username}">
-                                <a href="#" class="btn btn-success btn-sm friend_request_accept">Accept</a>
-                                <a href="#" class="btn btn-danger btn-sm friend_request_decline">Decline</a>
+                                <a href="#" class="btn btn-success btn-sm friend_request_accept">${getUtilsMap("Accept")}</a>
+                                <a href="#" class="btn btn-danger btn-sm friend_request_decline">${getUtilsMap("Reject")}</a>
                             </div>
                       </div>
                         `)
@@ -379,9 +387,9 @@ $(() => {
             }
         });
         if (accept) {
-            $target.children('.friend_request_accept').text("Accepted");
+            $target.children('.friend_request_accept').text(`${getUtilsMap("Accepted")}`);
         } else {
-            $target.children('.friend_request_decline').text("Declined");
+            $target.children('.friend_request_decline').text(`${getUtilsMap("Rejected")}`);
         }
         $target.children().addClass("disabled");
 
