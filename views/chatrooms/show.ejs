@@ -28,7 +28,9 @@
         <div id="chatLog" >
             <% for(let i=0; i < data.length; i++) {%>
                 <% let chat=data[i]%>
-                <div class="card <%= username === chat.senderName? 'myMsg':''%>">
+                
+                <div class="card <%= username === chat.senderName? 'myMsg':''%>" name = "chatcard" val = "<%= chat.senderName %>"  >
+                    
                     <div class="row">
                         <% if(username !== chat.senderName){%>
                         <div class="col-md-2 sendInfo">
@@ -53,8 +55,11 @@
                                 <p class="card-text">
                                     <%= chat.translatedMsg%>
                                 </p>
+                                
                             </div>
-
+                            <div>
+                            <button  class="friendbutton" name = "<%= chat.senderName %>" style = "display:none;"  >Add</button>
+                            </div>
                         </div>
                         <% if(username === chat.senderName){%>
                             <div class="col-md-2 sendInfo">
@@ -107,3 +112,4 @@
 integrity="sha512-YybopSVjZU0fe8TY4YDuQbP5bhwpGBE/T6eBUEZ0usM72IWBfWrgVI13qfX4V2A/W7Hdqnm7PIOYOwP9YHnICw=="
 crossorigin="anonymous"></script>
 <script src="/chatrooms/chatrooms.js"></script>
+

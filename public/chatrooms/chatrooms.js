@@ -141,4 +141,27 @@ $(() => {
         console.log($(this).find(".originalData"))
         $($(this).find(".originalData")).hide();
     } );
+
+   
 })
+
+  
+$('div[name="chatcard"]').click(function(event) {
+    event.preventDefault();
+    var info = $(this).attr("val");
+    $("button[name="+info+"]").show()
+    alert(info)
+    
+
+})
+
+$('.friendbutton').click(function(event) {
+    event.preventDefault();
+    var info = $(this).attr("name")
+    alert(info)
+})
+
+
+
+    
+   // console.log(chat.senderName)
