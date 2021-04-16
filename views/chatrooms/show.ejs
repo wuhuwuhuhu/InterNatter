@@ -29,7 +29,7 @@
             <% for(let i=0; i < data.length; i++) {%>
                 <% let chat=data[i]%>
                 
-                <div class="card <%= username === chat.senderName? 'myMsg':''%>" name = "chatcard" val = "<%= chat.senderName %>"  >
+                <div class="card <%= username === chat.senderName? 'myMsg':''%>" name = "chatcard" senderid ="<%= chat.sender %>" val2 = "<%= chat.senderName %>"  >
                     
                     <div class="row">
                         <% if(username !== chat.senderName){%>
@@ -58,7 +58,7 @@
                                 
                             </div>
                             <div>
-                            <button  class="friendbutton" name = "<%= chat.senderName %>" style = "display:none;"  >Add</button>
+                            <button  class="friendbutton" senderid2 = "<%= chat.sender %>" val2 = "<%= chat.sender %>" style = "display:none;"  >Add</button>
                             </div>
                         </div>
                         <% if(username === chat.senderName){%>

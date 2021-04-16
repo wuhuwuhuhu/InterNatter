@@ -142,25 +142,66 @@ $(() => {
         $($(this).find(".originalData")).hide();
     } );
 
+
+    $('div[name="chatcard"]').click(function(event) {
+        event.preventDefault();
+        var sender = $(this).attr("senderid");
+        if(userId == sender || !userId ){
+            return
+        }
+
+        $("button[senderid2="+sender+"]").toggle()
+       // alert(sender)
+        
+    
+    })
+
+
+    
+    $('.friendbutton').click(function(event) {
+        event.preventDefault();
+        var senderid = $(this).attr("senderid2")
+
+        
+        
+        addNewFriend()
+    
+        function addNewFriend(event) {
+            const data = {
+                userId,
+                friendId: senderid
+            }
+            alert(senderid)
+            const $target = $(event.target)
+            $.post("/users/addFriend", data, function (res) {
+                if (res.status === 1) {
+                    let $error = $(`
+                    <div class="alert alert-warning" role="alert" style="width:80%; margin-left: 10%;
+                    margin-top: 5px;">${getUtilsMap(res.msg)}</div>
+                    `)
+                    $target.after($error)
+    
+                    $target.text(`${getUtilsMap("Failed")}`)
+                    $target.removeClass("btn-success");
+                    $target.addClass("btn-danger");
+                } else {
+                    alert(senderid)
+                    $target.text(`${getUtilsMap("Pending")}`)
+                }
+                $target.addClass("disabled");
+            })
+        }
+    })
+
    
 })
 
   
-$('div[name="chatcard"]').click(function(event) {
-    event.preventDefault();
-    var info = $(this).attr("val");
-    $("button[name="+info+"]").show()
-    alert(info)
-    
 
-})
 
-$('.friendbutton').click(function(event) {
-    event.preventDefault();
-    var info = $(this).attr("name")
-    alert(info)
-})
 
+
+ 
 
 
     
