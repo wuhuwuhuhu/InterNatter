@@ -33,7 +33,7 @@ const main = async () => {
           "originalMsg": "I am the best tester",
           "send_time": 1614905034820,
           "senderLang": "English",
-          "image": "https://pinprestige.com/wp-content/uploads/2021/01/%E5%AD%AB%E7%87%95%E5%A7%BF_%E9%A4%98%E9%A1%8D_%E5%96%AE%E6%9B%B2%E5%B0%81%E9%9D%A2_%E7%B9%81-scaled.jpg"
+          "image": "/images/avatars/default_avatar.png"
         },
         {
           "sender": "Jerry",

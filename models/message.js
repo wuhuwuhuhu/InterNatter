@@ -37,6 +37,7 @@ MessageSchema.statics.getMessage = async function (msgId, senderName, language){
         senderName = senderUser.username
     }
     return {
+        sender: msg.sender,
         senderName: senderName,
         originalLanguage: msg.originalLanguage,
         originalMsg: msg.content,
@@ -72,6 +73,7 @@ MessageSchema.statics.getChatroomLog = async function (chatroomId, language){
         }
          
         r.push({
+            sender: chat.sender,
             senderName: senderName,
             originalLanguage: chat.originalLanguage,
             originalMsg: chat.content,
@@ -105,8 +107,9 @@ MessageSchema.statics.getPrivateChatLog = async function ({userId, friendId}){
             chat.save()
         }
         let senderName = chat.senderName;
+        let senderUser;
         if(!senderName && chat.sender){
-            let senderUser = await mongoose.model('User').findById(chat.sender);
+            senderUser = await mongoose.model('User').findById(chat.sender);
             senderName = senderUser.username
         }
 
@@ -118,6 +121,7 @@ MessageSchema.statics.getPrivateChatLog = async function ({userId, friendId}){
         }
          
         r.push({
+            sender: senderUser,
             senderName: senderName,
             originalLanguage: chat.originalLanguage,
             originalMsg: chat.content,
