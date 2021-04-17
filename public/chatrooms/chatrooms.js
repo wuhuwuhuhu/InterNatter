@@ -184,7 +184,7 @@ $(() => {
                     $target.removeClass("btn-success");
                     $target.addClass("btn-danger");
                 } else {
-                    alert(senderid)
+
                     $target.text(`${getUtilsMap("Pending")}`)
                 }
                 $target.addClass("disabled");
