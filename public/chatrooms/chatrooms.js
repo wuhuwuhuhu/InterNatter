@@ -171,8 +171,7 @@ $(() => {
                 userId,
                 friendId: senderid
             }
-            alert(senderid)
-            const $target = $(event.target)
+           // const $target = $(event.target)
             $.post("/users/addFriend", data, function (res) {
                 if (res.status === 1) {
                     let $error = $(`
