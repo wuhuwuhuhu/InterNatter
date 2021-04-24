@@ -174,6 +174,7 @@ $(() => {
            // const $target = $(event.target)
             $.post("/users/addFriend", data, function (res) {
                 if (res.status === 1) {
+                    $("p[warn="+senderid+"]").show()
                     let $error = $(`
                     <div class="alert alert-warning" role="alert" style="width:80%; margin-left: 10%;
                     margin-top: 5px;">${getUtilsMap(res.msg)}</div>
