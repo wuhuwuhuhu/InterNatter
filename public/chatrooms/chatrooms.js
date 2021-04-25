@@ -174,6 +174,7 @@ $(() => {
            // const $target = $(event.target)
             $.post("/users/addFriend", data, function (res) {
                 if (res.status === 1) {
+                    $("p[success="+senderid+"]").hide()
                     $("p[warn="+senderid+"]").show()
                     let $error = $(`
                     <div class="alert alert-warning" role="alert" style="width:80%; margin-left: 10%;
@@ -186,6 +187,8 @@ $(() => {
                     $target.addClass("btn-danger");
                 } else {
 
+                    $("p[warn="+senderid+"]").hide()
+                    $("p[success="+senderid+"]").show()
                     $target.text(`${getUtilsMap("Pending")}`)
                 }
                 $target.addClass("disabled");

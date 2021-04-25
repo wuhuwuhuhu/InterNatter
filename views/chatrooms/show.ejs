@@ -60,6 +60,7 @@
                             <div>
                             <button  class="friendbutton" senderid2 = "<%= chat.sender %>" val2 = "<%= chat.sender %>" style = "display:none; background-color: green; color: white;"  >Add</button>
                             <p warn = "<%= chat.sender %>" style = "display:none">User is already your friend or friend request already sent</p>
+                            <p success = "<%= chat.sender %>" style = "display:none">Friend request sent successfully</p>
                             </div>
                         </div>
                         <% if(username === chat.senderName){%>
