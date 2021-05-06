@@ -12,4 +12,4 @@ To run the app:
 + Every Time
   - Start mongod.exe and mongo.exe.
   - Enter to the InterNatter folder by command prompt and then input node app.js (or nodemon app.js) and then press enter.
-  - The server will be running at http://localhost:3000/
+  - The server will be running at http://www.internatter.net
